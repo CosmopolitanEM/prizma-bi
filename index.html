@@ -94,8 +94,10 @@
   /* ---------- Statement (model section head) ---------- */
   .eyebrow{display:inline-flex;align-items:center;gap:10px;font:500 12px var(--mono);letter-spacing:.16em;text-transform:uppercase;color:var(--amber);margin-bottom:22px}
   .eyebrow::before{content:"";width:28px;height:1px;background:currentColor}
-  #model .sec-head{max-width:none}
-  .statement{font-size:clamp(52px,8.4vw,136px);line-height:1.1;font-weight:600;letter-spacing:-.012em}
+  #model .sec-head,#cases .sec-head,#process .sec-head{max-width:none}
+  #process .sec-head h2{white-space:nowrap;font-size:min(calc((100vw - 64px) / 19), 78px)}
+  #cases .sec-head h2{white-space:nowrap;font-size:min(calc((100vw - 64px) / 16), 78px)}
+  .statement{font-size:min(calc((100vw - 64px) / 15.2), 104px);line-height:1.1;font-weight:600;letter-spacing:-.012em;white-space:nowrap}
   .statement em{display:inline-block;padding-right:.08em;background:linear-gradient(90deg,var(--orange),var(--amber) 70%);-webkit-background-clip:text;background-clip:text;color:transparent}
   .statement-row{display:flex;align-items:center;gap:28px 48px;flex-wrap:wrap;margin-top:28px}
   #model .statement-row p{font-size:clamp(18px,1.6vw,21px);color:var(--text-2);max-width:52ch;margin:0}
@@ -248,9 +250,9 @@
   @media (max-width:1000px){.partner,.partner.flip{grid-template-columns:1fr;gap:36px;padding:40px 32px}.partner.flip .p-photo{order:0}.p-photo{max-width:220px;justify-self:start}}
   @media (max-width:640px){.partner,.partner.flip{padding:30px 22px}.p-photo{max-width:180px}.partner::after{font-size:200px}.standard{grid-template-columns:1fr}}
   /* CTA */
-  .cta{position:relative;border-radius:28px;padding:80px 64px;overflow:hidden;border:1px solid rgba(242,140,40,.35);
+  .cta{position:relative;border-radius:6px;padding:80px 64px;overflow:hidden;border:1px solid rgba(242,140,40,.35);
     background:radial-gradient(800px circle at 85% 0%,rgba(242,140,40,.28),transparent 55%),radial-gradient(600px circle at 0% 100%,rgba(54,194,180,.14),transparent 55%),var(--bg-2)}
-  .cta h2{font-size:clamp(40px,6vw,80px);line-height:1.06;font-weight:600;max-width:15ch}
+  .cta h2{font-size:clamp(40px,5.4vw,76px);line-height:1.06;font-weight:600;max-width:24ch}
   .cta p{color:var(--text-2);font-size:18px;margin:18px 0 32px;max-width:52ch}
   .cta .mail{font:500 14px var(--mono);color:var(--text-2);margin-left:8px}
 
@@ -285,7 +287,8 @@
     .links{gap:12px}
     .links .btn{display:none}
     .cases,.process{grid-template-columns:1fr}
-    .statement{font-size:calc((100vw - 32px) * .128)}
+    .statement{font-size:calc((100vw - 32px) * .128);white-space:normal}
+    #cases .sec-head h2,#process .sec-head h2{white-space:normal;font-size:clamp(40px,11vw,56px)}
     .hero-foot div{padding:14px}
   }
   @media (prefers-reduced-motion:reduce){
@@ -309,7 +312,6 @@
         <a class="hide-m" href="#model" data-i18n="nav_model">Model</a>
         <a class="hide-m" href="#cases" data-i18n="nav_cases">Services</a>
         <a class="hide-m" href="#process" data-i18n="nav_process">Process</a>
-        <a class="hide-m" href="#team" data-i18n="nav_team">Partners</a>
         <div class="lang" role="group" aria-label="Language">
           <button type="button" data-lang="en" class="on">EN</button>
           <button type="button" data-lang="es">ES</button>
@@ -334,6 +336,20 @@
     <div class="scan" aria-hidden="true"></div>
   </section>
 
+  <!-- Showreel -->
+  <section id="reel-sec">
+    <div class="wrap">
+      <div class="sec-head">
+        <span class="eyebrow" data-i18n="rl_eyebrow">In motion</span>
+        <h2 data-i18n-html="rl_title">From chaos <em>to control.</em></h2>
+      </div>
+      <div class="reel reveal">
+        <canvas id="reel" role="img" aria-label="PRIZMA BI showreel"></canvas>
+        <button type="button" class="reel-btn" aria-label="Pause">❚❚</button>
+      </div>
+    </div>
+  </section>
+
   <!-- Use cases -->
   <section id="cases">
     <div class="wrap">
@@ -353,7 +369,7 @@
     <div class="wrap">
       <div class="sec-head">
         <span class="eyebrow" data-i18n="md_eyebrow">The model</span>
-        <h1 class="statement" data-i18n-html="hero_title">Classic rigour.<br><em>New intelligence.</em></h1>
+        <h1 class="statement" data-i18n-html="hero_title">Classic rigour. <em>New intelligence.</em></h1>
         <div class="statement-row">
           <p data-i18n="hero_lead">Your finance department as a service: a dedicated finance team, senior partner oversight and custom AI automation. You decide, we execute.</p>
           <a class="btn primary" href="#contact"><span data-i18n="hero_cta1">Book a call</span><span class="arr">→</span></a>
@@ -386,20 +402,6 @@
     </div>
   </section>
 
-  <!-- Showreel -->
-  <section id="reel-sec" style="padding-top:0">
-    <div class="wrap">
-      <div class="sec-head">
-        <span class="eyebrow" data-i18n="rl_eyebrow">In motion</span>
-        <h2 data-i18n-html="rl_title">From chaos <em>to control.</em></h2>
-      </div>
-      <div class="reel reveal">
-        <canvas id="reel" role="img" aria-label="PRIZMA BI showreel"></canvas>
-        <button type="button" class="reel-btn" aria-label="Pause">❚❚</button>
-      </div>
-    </div>
-  </section>
-
   <!-- Process -->
   <section id="process">
     <div class="wrap">
@@ -412,71 +414,6 @@
         <div class="pstep"><div class="n">02</div><h3 data-i18n="s2_t">Team</h3><p data-i18n="s2_d">We recruit and train your dedicated team on your systems and ways of working.</p></div>
         <div class="pstep"><div class="n">03</div><h3 data-i18n="s3_t">Automation</h3><p data-i18n="s3_d">We automate the repetitive and integrate your systems for speed and accuracy.</p></div>
         <div class="pstep"><div class="n">04</div><h3 data-i18n="s4_t">Control</h3><p data-i18n="s4_d">Senior oversight, service KPIs and continuous improvement every month.</p></div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Partners -->
-  <section id="team">
-    <div class="wrap">
-      <div class="sec-head">
-        <span class="eyebrow" data-i18n="tm_eyebrow">The partners</span>
-        <h2 data-i18n-html="tm_title">Senior judgement <em>on every deliverable.</em></h2>
-        <p data-i18n="tm_lead">Two partners, one standard. Every report, reconciliation and model your team delivers is reviewed by someone who has run a finance function.</p>
-      </div>
-      <div class="partners">
-        <article class="partner reveal" data-initial="R">
-          <div class="p-photo"><div class="disc"><img src="rocio.png" alt="Rocío Marín Martínez" onerror="this.parentNode.textContent='RM'"></div></div>
-          <div class="p-body">
-            <div class="role" data-i18n="tm_r_role">Co-founder · Reporting, close &amp; tax</div>
-            <h3>Rocío <em>Marín</em> Martínez</h3>
-            <p data-i18n="tm_r_bio">Economist with master's degrees in accounting &amp; finance and in tax. She has run the accounting and finance department of a multi-company business group, from month-end close and reporting to banks and audit, and has advised companies on tax since 2019. At PRIZMA she owns the quality of every close, report and filing, and is the partner clients speak to every week.</p>
-          <div class="leads">
-            <h4 data-i18n="tm_leads">Leads at PRIZMA</h4>
-            <div>
-              <button type="button" class="lead-chip" data-case="0" data-i18n="tm_r_l1">Management reporting</button>
-              <button type="button" class="lead-chip" data-case="7" data-i18n="tm_r_l2">Bookkeeping &amp; close</button>
-              <button type="button" class="lead-chip" data-case="3" data-i18n="tm_r_l3">Budgeting</button>
-              <span class="lead-chip static" data-i18n="tm_r_l4">Tax &amp; compliance</span>
-            </div>
-          </div>
-          <div class="creds">
-            <span data-i18n="tm_c1">BSc Economics · Univ. Zaragoza</span>
-            <span data-i18n="tm_c2">MSc Accounting &amp; Financial Mgmt</span>
-            <span data-i18n="tm_c3">MSc Tax Advisory</span>
-            <span data-i18n="tm_c4">MSc Digital Business · EOI</span>
-          </div>
-          <div class="mlinks"><a href="https://www.linkedin.com/in/rociomarin-canelahome" target="_blank" rel="noopener">LinkedIn →</a><a href="mailto:rocio@prizma.bi">rocio@prizma.bi</a></div>
-          </div>
-        </article>
-        <article class="partner reveal flip" data-initial="J">
-          <div class="p-photo"><div class="disc"><img src="javier.png" alt="Javier Munoz" onerror="this.parentNode.textContent='JM'"></div></div>
-          <div class="p-body">
-            <div class="role" data-i18n="tm_j_role">Co-founder · Controls, cash &amp; group finance</div>
-            <h3>Javier <em>Munoz</em>, CFE</h3>
-            <!-- TODO: Javier to validate this bio -->
-          <p data-i18n="tm_j_bio">Certified Fraud Examiner. His focus is what makes a finance function trustworthy: controls, cash and group structures. He works on treasury and cash-flow forecasting, multi-entity group structuring and financial controls, and leads PRIZMA's automation roadmap, turning repetitive finance work into supervised, auditable workflows.</p>
-          <div class="leads">
-            <h4 data-i18n="tm_leads">Leads at PRIZMA</h4>
-            <div>
-              <button type="button" class="lead-chip" data-case="4" data-i18n="tm_j_l1">Cash flow forecasting</button>
-              <button type="button" class="lead-chip" data-case="2" data-i18n="tm_j_l2">Consolidated reporting</button>
-              <button type="button" class="lead-chip" data-case="1" data-i18n="tm_j_l3">Investor &amp; board reporting</button>
-              <span class="lead-chip static" data-i18n="tm_j_l4">Controls &amp; AI automation</span>
-            </div>
-          </div>
-          <div class="creds">
-            <span>Certified Fraud Examiner (CFE)</span>
-          </div>
-          <!-- TODO: add Javier's LinkedIn URL -->
-          <div class="mlinks"><a href="mailto:javier.munoz@prizma.bi">javier.munoz@prizma.bi</a></div>
-          </div>
-        </article>
-      </div>
-      <div class="standard reveal">
-        <div><b data-i18n="st1_t">Partner review</b><span data-i18n="st1_d">Nothing reaches you without a partner's sign-off.</span></div>
-        <div><b data-i18n="st2_t">One point of contact</b><span data-i18n="st2_d">A named partner who knows your numbers and your business.</span></div>
-        <div><b data-i18n="st3_t">Documented &amp; auditable</b><span data-i18n="st3_d">Every process written down, every automation traceable.</span></div>
       </div>
     </div>
   </section>
@@ -518,7 +455,7 @@ const T = {
   es: {
     nav_model:"Modelo", nav_cases:"Servicios", nav_process:"Proceso", nav_team:"Socios", nav_cta:"Hablemos",
     hero_eyebrow:"Finanzas · Talento · IA",
-    hero_title:"Rigor clásico.<br><em>Inteligencia nueva.</em>",
+    hero_title:"Rigor clásico. <em>Inteligencia nueva.</em>",
     hero_lead:"Tu departamento financiero como servicio: un equipo financiero dedicado, supervisión de socios senior y automatización con IA a medida. Tú decides, nosotros ejecutamos.",
     hero_cta1:"Agenda una llamada", hero_cta2:"Mira lo que recibes",
     hf1:"Equipo financiero dedicado", hf2:"Supervisión senior", hf3:"Automatización e IA a medida", hf4:"Una sola factura",
@@ -630,10 +567,10 @@ window.PrizmaReveal = els => els.forEach((el, i) => {
 PrizmaReveal(document.querySelectorAll('.sec-head,.pillar,.pstep,.strip,.reel,.cta,.partner,.standard'));
 document.querySelectorAll('.lead-chip[data-case]').forEach(b => b.addEventListener('click', () => window.PrizmaCases && PrizmaCases.open(+b.dataset.case)));
 </script>
-<script src="previews.js?v=1790566470"></script>
-<script src="cases.js?v=1790566470"></script>
-<script src="hero.js?v=1790566470"></script>
-<script type="module" src="hero3d.js?v=1790566470"></script>
-<script src="reel.js?v=1790566470"></script>
+<script src="previews.js?v=1790586267"></script>
+<script src="cases.js?v=1790586267"></script>
+<script src="hero.js?v=1790586267"></script>
+<script type="module" src="hero3d.js?v=1790586267"></script>
+<script src="reel.js?v=1790586267"></script>
 </body>
 </html>
