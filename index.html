@@ -4,314 +4,264 @@
 <script>document.documentElement.classList.add("js")</script>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>PRIZMA BI — Classic rigour. New intelligence.</title>
-<meta name="description" content="PRIZMA BI: your finance department as a service. A dedicated finance team, senior oversight and custom AI automation for reporting, consolidation, budgeting, cash flow, FP&A, modelling and bookkeeping.">
-<meta property="og:title" content="PRIZMA BI — Classic rigour. New intelligence.">
-<meta property="og:description" content="A dedicated finance team, senior oversight and custom AI automation.">
+<title>PRIZMA BI — AI consulting for finance</title>
+<meta name="description" content="PRIZMA BI is an AI consultancy built by finance professionals. We design, build and run AI and automation across the finance function: reporting, close, consolidation, cash and planning, with the controls a CFO expects.">
+<meta property="og:title" content="PRIZMA BI — AI consulting for finance">
+<meta property="og:description" content="Finance professionals who build AI. Strategy, automation and AI agents for the finance function.">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://prizma.bi/">
-<meta name="theme-color" content="#05080F">
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cpath d='M16 3 L29 27 H3 Z' fill='%230B1F3A' stroke='%23fff' stroke-width='1.5'/%3E%3Cpath d='M16 12 L22 24 H10 Z' fill='%23FFB547'/%3E%3C/svg%3E">
+<meta name="theme-color" content="#000000">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23000'/%3E%3Cpath d='M16 6 L26 25 H6 Z' fill='none' stroke='%23fff' stroke-width='2'/%3E%3Cpath d='M16 14 L20.5 22 H11.5 Z' fill='%2386BC25'/%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500;1,600&family=Geist:wght@400;500;600;700;800&family=Geist+Mono:wght@400;500;600&display=swap" rel="stylesheet">
-<script type="importmap">
-{ "imports": {
-  "three": "https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js",
-  "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/"
-} }
-</script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
   :root{
-    color-scheme:dark;
-    --bg:#05080F; --bg-2:#0A1220; --navy:#0B1F3A;
-    --surface:rgba(255,255,255,.035); --surface-2:rgba(255,255,255,.06);
-    --line:rgba(255,255,255,.09); --line-2:rgba(255,255,255,.16);
-    --text:#E9EDF4; --text-2:#B4BDCC; --muted:#7C879A;
-    --orange:#F28C28; --amber:#FFB547; --teal:#36C2B4;
+    --black:#000; --ink:#111; --ink-2:#1A1A1A;
+    --white:#fff; --paper:#F5F5F5;
+    --grey-1:#E6E6E6; --grey-2:#BBBBBB; --grey-3:#757575; --grey-4:#53565A;
+    --green:#86BC25; --green-d:#26890D; --green-dd:#046A38; --teal:#00ABAB;
     --max:1240px;
-    --mono:"Geist Mono",ui-monospace,Menlo,Consolas,monospace;
-    --display:"Cormorant Garamond","Cormorant",Georgia,"Times New Roman",serif;
-    --sans:Geist,"Helvetica Neue",Arial,sans-serif;
+    --sans:Inter,"Helvetica Neue",Arial,sans-serif;
+    --mono:"JetBrains Mono",ui-monospace,Menlo,Consolas,monospace;
   }
   *{box-sizing:border-box;margin:0;padding:0}
-  html{scroll-behavior:smooth;background:var(--bg)}
-  body{font-family:var(--sans);color:var(--text);background:var(--bg);line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+  html{scroll-behavior:smooth;background:var(--white)}
+  body{font-family:var(--sans);color:var(--black);background:var(--white);line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden}
   body.lock{overflow:hidden}
   a{color:inherit}
-  ::selection{background:var(--orange);color:#05080F}
+  button{font:inherit;color:inherit}
+  ::selection{background:var(--green);color:#000}
   .wrap{max-width:var(--max);margin:0 auto;padding:0 24px}
   .mono{font-family:var(--mono)}
-  h1,h2,h3,h4{font-family:var(--display);font-weight:600;letter-spacing:-.005em;font-kerning:normal;text-rendering:optimizeLegibility;text-wrap:balance}
-  em{font-style:normal}
-  h1 em,h2 em,h3 em{font-style:italic;font-weight:500}
-  button{font:inherit;color:inherit}
-
-  body::before{content:"";position:fixed;inset:0;pointer-events:none;z-index:0;
-    background-image:linear-gradient(var(--line) 1px,transparent 1px),linear-gradient(90deg,var(--line) 1px,transparent 1px);
-    background-size:80px 80px;opacity:.3;
-    -webkit-mask-image:radial-gradient(ellipse at 50% 0%,#000 10%,transparent 70%);mask-image:radial-gradient(ellipse at 50% 0%,#000 10%,transparent 70%)}
-  main,header,footer{position:relative;z-index:1}
-  .progress{position:fixed;top:0;left:0;height:2px;width:100%;transform-origin:0 50%;transform:scaleX(0);background:linear-gradient(90deg,var(--orange),var(--amber));z-index:30}
+  h1,h2,h3,h4{font-weight:700;letter-spacing:-.02em;line-height:1.08;text-wrap:balance}
+  em{font-style:normal;color:var(--green)}
+  .dark{background:var(--black);color:var(--white)}
+  .dark em{color:var(--green)}
 
   /* ---------- Nav ---------- */
-  header{position:fixed;top:0;left:0;right:0;z-index:20;padding-top:env(safe-area-inset-top,0px);transition:background .3s,border-color .3s,opacity .5s,transform .5s;border-bottom:1px solid transparent;opacity:0;transform:translateY(-100%);pointer-events:none}
-  header.scrolled,header:focus-within{opacity:1;transform:none;pointer-events:auto}
-  header.scrolled{background:rgba(5,8,15,.72);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border-bottom-color:var(--line)}
-  nav{display:flex;align-items:center;justify-content:space-between;height:72px}
-  .logo{display:flex;align-items:center;gap:10px;font-family:var(--display);font-weight:700;letter-spacing:.16em;text-decoration:none;font-size:18px}
-  .logo span{color:var(--orange)}
-  .links{display:flex;align-items:center;gap:28px;font-size:14px}
-  .links a{text-decoration:none;color:var(--text-2);transition:color .2s}
-  .links a:hover{color:#fff}
-  .lang{display:flex;border:1px solid var(--line-2);border-radius:999px;overflow:hidden}
-  .lang button{border:0;background:none;font:500 11px var(--mono);padding:6px 10px;cursor:pointer;color:var(--muted);letter-spacing:.06em}
-  .lang button.on{background:#fff;color:#05080F}
+  header{position:sticky;top:0;z-index:20;background:var(--black);color:#fff;border-bottom:1px solid #222}
+  nav{display:flex;align-items:center;justify-content:space-between;height:68px;gap:20px}
+  .logo{display:flex;align-items:center;gap:10px;font-weight:800;letter-spacing:.04em;text-decoration:none;font-size:19px}
+  .logo span{font-weight:300}
+  .logo i{display:inline-block;width:8px;height:8px;background:var(--green);border-radius:50%;margin-left:2px}
+  .links{display:flex;align-items:center;gap:30px;font-size:14px;font-weight:500}
+  .links a:not(.btn){text-decoration:none;color:#ddd;position:relative;padding:22px 0}
+  .links a:not(.btn)::after{content:"";position:absolute;left:0;right:0;bottom:14px;height:2px;background:var(--green);transform:scaleX(0);transition:transform .25s}
+  .links a:not(.btn):hover{color:#fff}
+  .links a:not(.btn):hover::after{transform:scaleX(1)}
+  .lang{display:flex;border:1px solid #444}
+  .lang button{border:0;background:none;font:500 11px var(--mono);padding:6px 10px;cursor:pointer;color:#999;letter-spacing:.06em}
+  .lang button.on{background:#fff;color:#000}
 
-  .btn{position:relative;display:inline-flex;align-items:center;gap:10px;text-decoration:none;font-weight:600;font-size:14px;padding:13px 22px;border-radius:999px;overflow:hidden;border:0;cursor:pointer;transition:transform .2s,box-shadow .3s,background .3s,color .3s}
-  .btn.primary{background:var(--orange);color:#05080F}
-  .btn.primary:hover{transform:translateY(-2px);box-shadow:0 10px 40px -8px rgba(242,140,40,.7)}
-  .btn.ghost{border:1px solid var(--line-2);color:var(--text);background:rgba(255,255,255,.03);backdrop-filter:blur(8px)}
-  .btn.ghost:hover{border-color:#fff;background:rgba(255,255,255,.08)}
-  .btn::after{content:"";position:absolute;inset:0;background:linear-gradient(110deg,transparent 30%,rgba(255,255,255,.4) 50%,transparent 70%);transform:translateX(-120%);transition:transform .7s}
-  .btn:hover::after{transform:translateX(120%)}
-  .btn .arr{transition:transform .25s}
+  .btn{display:inline-flex;align-items:center;gap:10px;text-decoration:none;font-weight:600;font-size:15px;padding:14px 24px;border:2px solid transparent;cursor:pointer;transition:background .2s,color .2s,border-color .2s}
+  .btn.primary{background:var(--green);color:#000;border-color:var(--green)}
+  .btn.primary:hover{background:#fff;border-color:#fff}
+  .btn.outline{border-color:currentColor;background:transparent}
+  .btn.outline:hover{background:#fff;color:#000;border-color:#fff}
+  .btn.black{background:#000;color:#fff;border-color:#000}
+  .btn.black:hover{background:transparent;color:#000}
+  .btn .arr{transition:transform .2s}
   .btn:hover .arr{transform:translateX(4px)}
-  .links .btn{padding:9px 16px;color:#05080F}
+  .links .btn{padding:9px 16px;font-size:14px}
 
-  /* ---------- Hero: the film, nothing else ---------- */
-  .hero{position:relative;height:100vh;height:100svh;min-height:520px;overflow:hidden;background:#030407}
-  .hero-media{position:absolute;inset:0;z-index:0;background:#030407}
-  .hero-media canvas,.hero-media video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block}
-  .hero-media video{opacity:0;transition:opacity 1.2s}
-  .hero.has-3d #heroCanvas{display:none}
-  .hero.has-video .hero-media video{opacity:1}
-  .hero.has-video .hero-media canvas{opacity:0}
-  .hero-media::after{content:"";position:absolute;inset:0;pointer-events:none;background:linear-gradient(180deg,rgba(3,4,7,.35) 0%,transparent 18%,transparent 78%,var(--bg) 100%)}
-  .scan{position:absolute;inset:0;z-index:1;pointer-events:none;background:repeating-linear-gradient(0deg,rgba(255,255,255,.018) 0 1px,transparent 1px 3px)}
-  .vignette{position:absolute;inset:0;z-index:1;pointer-events:none;box-shadow:inset 0 0 240px 60px rgba(0,0,0,.75)}
-
-  /* ---------- Statement (model section head) ---------- */
-  .eyebrow{display:inline-flex;align-items:center;gap:10px;font:500 12px var(--mono);letter-spacing:.16em;text-transform:uppercase;color:var(--amber);margin-bottom:22px}
-  .eyebrow::before{content:"";width:28px;height:1px;background:currentColor}
-  #model .sec-head,#cases .sec-head,#process .sec-head{max-width:none}
-  #process .sec-head h2{white-space:nowrap;font-size:min(calc((100vw - 64px) / 19), 78px)}
-  #cases .sec-head h2{white-space:nowrap;font-size:min(calc((100vw - 64px) / 16), 78px)}
-  .statement{font-size:min(calc((100vw - 64px) / 15.2), 104px);line-height:1.1;font-weight:600;letter-spacing:-.012em;white-space:nowrap}
-  .statement em{display:inline-block;padding-right:.08em;background:linear-gradient(90deg,var(--orange),var(--amber) 70%);-webkit-background-clip:text;background-clip:text;color:transparent}
-  .statement-row{display:flex;align-items:center;gap:28px 48px;flex-wrap:wrap;margin-top:28px}
-  #model .statement-row p{font-size:clamp(18px,1.6vw,21px);color:var(--text-2);max-width:52ch;margin:0}
+  /* ---------- Hero ---------- */
+  .hero{position:relative;padding:96px 0 0;overflow:hidden}
+  .hero::before{content:"";position:absolute;right:-12%;top:-30%;width:70%;aspect-ratio:1;border-radius:50%;
+    background:radial-gradient(circle,rgba(134,188,37,.22),transparent 62%);pointer-events:none}
+  .hero-grid{position:relative;display:grid;grid-template-columns:1.05fr .95fr;gap:56px;align-items:center}
+  .eyebrow{display:inline-flex;align-items:center;gap:10px;font:500 12px var(--mono);letter-spacing:.16em;text-transform:uppercase;color:var(--green-d);margin-bottom:22px}
+  .dark .eyebrow{color:var(--green)}
+  .eyebrow::before{content:"";width:10px;height:10px;background:currentColor}
+  .hero h1{font-size:clamp(42px,5.6vw,76px);font-weight:800;letter-spacing:-.035em}
+  .hero .lead{font-size:clamp(17px,1.5vw,20px);color:#cfcfcf;margin:26px 0 34px;max-width:54ch;font-weight:300}
   .ctas{display:flex;gap:12px;flex-wrap:wrap}
-
-  /* ---------- Marquee ---------- */
-  .marquee{border-top:1px solid var(--line);border-bottom:1px solid var(--line);overflow:hidden;padding:18px 0;background:rgba(255,255,255,.015)}
-  .track{display:flex;gap:48px;width:max-content;animation:scroll 40s linear infinite}
-  .marquee:hover .track{animation-play-state:paused}
-  .track span{font:500 14px var(--mono);letter-spacing:.12em;text-transform:uppercase;color:var(--text-2);white-space:nowrap;display:flex;align-items:center;gap:48px}
-  .track span::after{content:"◆";color:var(--orange);font-size:9px}
-  @keyframes scroll{to{transform:translateX(-50%)}}
+  .hero-visual{position:relative;border:1px solid #2a2a2a;background:#111;box-shadow:0 40px 120px -40px rgba(134,188,37,.45)}
+  .hero-visual canvas{display:block;width:100%;aspect-ratio:8/5}
+  .hero-visual .tag{display:flex;justify-content:space-between;padding:10px 14px;border-top:1px solid #2a2a2a;font:500 10.5px var(--mono);letter-spacing:.1em;color:#888;text-transform:uppercase}
+  .hero-visual .tag b{color:var(--green);font-weight:500}
+  .proof{position:relative;display:grid;grid-template-columns:repeat(4,1fr);margin-top:88px;border-top:1px solid #2a2a2a}
+  .proof div{padding:28px 24px 36px 0}
+  .proof div + div{padding-left:24px;border-left:1px solid #2a2a2a}
+  .proof b{display:block;font-size:17px;font-weight:700;margin-bottom:4px}
+  .proof b::before{content:"";display:inline-block;width:8px;height:8px;background:var(--green);margin-right:10px;vertical-align:2px}
+  .proof span{font-size:14px;color:#a8a8a8}
 
   /* ---------- Sections ---------- */
-  section{padding:120px 0;position:relative}
-  .sec-head{max-width:780px;margin-bottom:56px}
-  .sec-head h2{font-size:clamp(40px,5.8vw,78px);line-height:1.06;font-weight:600}
-  .sec-head h2 em{color:var(--orange)}
-  .sec-head p{color:var(--text-2);font-size:18px;margin-top:18px;max-width:60ch}
+  section{padding:112px 0;position:relative}
+  .sec-head{max-width:820px;margin-bottom:56px}
+  .sec-head h2{font-size:clamp(34px,4.4vw,58px)}
+  .sec-head p{color:var(--grey-4);font-size:18px;margin-top:18px;max-width:62ch}
+  .dark .sec-head p{color:#b5b5b5}
+  .idx{font:500 12px var(--mono);letter-spacing:.14em;color:var(--grey-3)}
 
-  .card{position:relative;background:var(--surface);border:1px solid var(--line);border-radius:20px;padding:30px;overflow:hidden;transition:transform .35s cubic-bezier(.2,.7,.2,1),border-color .35s,background .35s}
-  .card::before{content:"";position:absolute;inset:0;border-radius:inherit;pointer-events:none;opacity:0;transition:opacity .3s;
-    background:radial-gradient(420px circle at var(--mx,50%) var(--my,50%),rgba(242,140,40,.16),transparent 45%)}
-  .card:hover{transform:translateY(-4px);border-color:rgba(242,140,40,.45);background:var(--surface-2)}
-  .card:hover::before{opacity:1}
-  .card > *{position:relative}
-  .idx{font:500 12px var(--mono);letter-spacing:.14em;color:var(--muted)}
+  /* Point of view */
+  .pov{background:var(--paper)}
+  .pov-grid{display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:start}
+  .pov blockquote{font-size:clamp(28px,3.2vw,42px);font-weight:300;line-height:1.2;letter-spacing:-.02em;border-left:6px solid var(--green);padding-left:28px}
+  .pov blockquote b{font-weight:700}
+  .pov-list{display:grid;gap:0}
+  .pov-list > div{padding:22px 0;border-top:1px solid var(--grey-1);display:grid;grid-template-columns:44px 1fr;gap:6px}
+  .pov-list > div:last-child{border-bottom:1px solid var(--grey-1)}
+  .pov-list span{font:600 13px var(--mono);color:var(--green-d)}
+  .pov-list b{display:block;font-size:18px;margin-bottom:4px}
+  .pov-list p{color:var(--grey-4);font-size:15.5px}
 
-  /* Model */
-  .pillars{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
-  .pillar h3{font-size:30px;line-height:1.05;margin:22px 0 10px}
-  .pillar p{color:var(--text-2);font-size:15.5px}
-  .pillar .ic{width:52px;height:52px;border-radius:14px;display:grid;place-items:center;background:rgba(242,140,40,.1);border:1px solid rgba(242,140,40,.3);margin-top:18px}
-  .strip{margin-top:16px;display:flex;align-items:center;justify-content:space-between;gap:20px;flex-wrap:wrap;padding:22px 30px;border-radius:20px;background:linear-gradient(90deg,rgba(242,140,40,.14),rgba(54,194,180,.08));border:1px solid rgba(242,140,40,.3)}
-  .strip p{font-family:var(--display);font-weight:600;font-size:28px;line-height:1.1}
-  .strip span{font:500 12px var(--mono);letter-spacing:.12em;color:var(--amber);text-transform:uppercase}
+  /* Services */
+  .services{display:grid;grid-template-columns:repeat(4,1fr);gap:0;border:1px solid var(--grey-1)}
+  .svc{padding:36px 30px 40px;border-right:1px solid var(--grey-1);position:relative;background:#fff;transition:background .25s}
+  .svc:last-child{border-right:0}
+  .svc::before{content:"";position:absolute;left:0;top:0;height:4px;width:100%;background:var(--black);transition:background .25s}
+  .svc:hover::before{background:var(--green)}
+  .svc:hover{background:var(--paper)}
+  .svc .ic{width:48px;height:48px;display:grid;place-items:center;background:#000;margin:20px 0 22px}
+  .svc h3{font-size:23px;margin-bottom:12px}
+  .svc > p{color:var(--grey-4);font-size:15px;margin-bottom:18px}
+  .svc ul{list-style:none;display:grid;gap:8px;font-size:14px}
+  .svc li{padding-left:18px;position:relative}
+  .svc li::before{content:"";position:absolute;left:0;top:9px;width:7px;height:7px;background:var(--green)}
 
-  /* Use cases */
-  .cases{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
-  .case{padding:14px 14px 22px;display:flex;flex-direction:column;text-align:left;cursor:pointer;width:100%}
-  .case .thumb{position:relative;aspect-ratio:8/5;border-radius:12px;overflow:hidden;border:1px solid var(--line);margin-bottom:18px;background:#0A1220}
-  .case .thumb canvas{width:100%;height:100%;display:block;transition:transform .6s cubic-bezier(.2,.7,.2,1)}
-  .case:hover .thumb canvas{transform:scale(1.04)}
-  .case .live{position:absolute;bottom:8px;left:8px;font-size:9.5px;letter-spacing:.12em;color:var(--orange);background:rgba(5,8,15,.7);padding:3px 7px;border-radius:6px}
+  /* Use cases (dark) */
+  .cases{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+  .case{background:#111;border:1px solid #262626;padding:12px 12px 22px;display:flex;flex-direction:column;text-align:left;cursor:pointer;width:100%;color:#fff;transition:border-color .25s,transform .25s}
+  .case:hover{border-color:var(--green);transform:translateY(-4px)}
+  .case .thumb{position:relative;aspect-ratio:8/5;overflow:hidden;border:1px solid #262626;margin-bottom:18px;background:#111}
+  .case .thumb canvas{width:100%;height:100%;display:block}
+  .case .live{position:absolute;bottom:8px;left:8px;font-size:9.5px;letter-spacing:.12em;color:var(--green);background:rgba(0,0,0,.7);padding:3px 7px}
   .case .idx,.case h3,.case p,.case .go{padding:0 10px}
-  .case h3{font-size:25px;line-height:1.08;margin:10px 0 8px}
-  .case p{color:var(--text-2);font-size:14.5px}
-  .case .go{margin-top:auto;padding-top:16px;font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);transition:color .3s}
-  .case:hover .go{color:var(--orange)}
-  .case:focus-visible{outline:2px solid var(--orange);outline-offset:3px}
+  .case .idx{color:#777}
+  .case h3{font-size:20px;margin:8px 0 8px;letter-spacing:-.01em}
+  .case p{color:#aaa;font-size:14px}
+  .case .go{margin-top:auto;padding-top:16px;font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:#777;transition:color .25s}
+  .case:hover .go{color:var(--green)}
+  .case:focus-visible{outline:2px solid var(--green);outline-offset:3px}
 
   /* Drawer */
   .drawer{position:fixed;inset:0;z-index:50;visibility:hidden}
   .drawer.open{visibility:visible}
-  .drawer-bg{position:absolute;inset:0;background:rgba(3,5,10,.62);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);opacity:0;transition:opacity .4s}
+  .drawer-bg{position:absolute;inset:0;background:rgba(0,0,0,.6);opacity:0;transition:opacity .35s}
   .drawer.open .drawer-bg{opacity:1}
-  .drawer-panel{position:absolute;top:0;right:0;bottom:0;width:min(680px,100%);overflow-y:auto;overscroll-behavior:contain;
-    background:linear-gradient(180deg,#0C1424,#070B14);border-left:1px solid var(--line-2);transform:translateX(100%);transition:transform .55s cubic-bezier(.2,.8,.2,1);box-shadow:-40px 0 120px -40px rgba(242,140,40,.35)}
+  .drawer-panel{position:absolute;top:0;right:0;bottom:0;width:min(680px,100%);overflow-y:auto;overscroll-behavior:contain;background:#fff;color:#000;
+    border-top:6px solid var(--green);transform:translateX(100%);transition:transform .5s cubic-bezier(.2,.8,.2,1)}
   .drawer.open .drawer-panel{transform:none}
-  .dr-x{position:sticky;top:16px;float:right;margin:16px 16px 0 0;width:40px;height:40px;border-radius:50%;border:1px solid var(--line-2);background:rgba(5,8,15,.7);color:#fff;cursor:pointer;font-size:18px;z-index:2;transition:background .2s,transform .3s}
-  .dr-x:hover{background:var(--orange);color:#05080F;transform:rotate(90deg)}
+  .dr-x{position:sticky;top:16px;float:right;margin:16px 16px 0 0;width:40px;height:40px;border:1px solid #000;background:#fff;cursor:pointer;font-size:16px;z-index:2;transition:background .2s,color .2s}
+  .dr-x:hover{background:#000;color:#fff}
   .drawer-body{padding:40px 40px 48px}
-  .drawer-body h2{font-size:clamp(36px,4.6vw,52px);line-height:1.08;margin:12px 0 10px}
-  .dr-lead{color:var(--text-2);font-size:17px;margin-bottom:24px}
-  .dr-preview{border-radius:16px;overflow:hidden;border:1px solid var(--line-2);background:#0A1220;box-shadow:0 30px 80px -30px rgba(242,140,40,.45);margin-bottom:8px}
+  .drawer-body h2{font-size:clamp(32px,4vw,44px);margin:12px 0 10px}
+  .dr-lead{color:var(--grey-4);font-size:17px;margin-bottom:24px}
+  .dr-preview{overflow:hidden;border:1px solid #222;background:#111}
   .dr-preview canvas{width:100%;display:block;aspect-ratio:8/5}
-  .dr-preview span{display:block;padding:8px 14px;font-size:10.5px;letter-spacing:.1em;color:var(--muted);border-top:1px solid var(--line);text-transform:uppercase}
-  .drawer-body h4{font-size:11.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--amber);margin:34px 0 8px;font-weight:600}
-  .drawer-body h4 em{color:var(--muted)}
-  .sub{display:grid;grid-template-columns:34px 1fr;gap:10px;padding:14px 0;border-top:1px solid var(--line)}
-  .sub > span{font-size:12px;color:var(--orange);padding-top:2px}
-  .sub b{font-family:var(--display);font-size:16.5px}
-  .sub p{color:var(--text-2);font-size:14.5px;margin-top:2px}
-  .auto{margin-top:26px;padding:20px 22px;border:1px solid rgba(54,194,180,.35);border-radius:16px;background:rgba(54,194,180,.06)}
-  .auto h4{margin:0 0 10px!important;color:var(--teal)!important}
+  .dr-preview span{display:block;padding:8px 14px;font-size:10.5px;letter-spacing:.1em;color:#888;border-top:1px solid #222;text-transform:uppercase}
+  .drawer-body h4{font-size:11.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--green-d);margin:34px 0 8px;font-weight:600}
+  .drawer-body h4 em{color:var(--grey-3)}
+  .sub{display:grid;grid-template-columns:34px 1fr;gap:10px;padding:14px 0;border-top:1px solid var(--grey-1)}
+  .sub > span{font-size:12px;color:var(--green-d);padding-top:2px}
+  .sub b{font-size:16px}
+  .sub p{color:var(--grey-4);font-size:14.5px;margin-top:2px}
+  .auto{margin-top:26px;padding:20px 22px;background:#000;color:#fff}
+  .auto h4{margin:0 0 10px!important;color:var(--green)!important}
   .auto ul{list-style:none;display:flex;flex-direction:column;gap:8px}
-  .auto li{font-size:14.5px;color:var(--text);padding-left:20px;position:relative}
-  .auto li::before{content:"";position:absolute;left:2px;top:9px;width:8px;height:8px;border-radius:2px;background:var(--teal);box-shadow:0 0 10px var(--teal)}
-  .example{margin-top:16px;padding:20px 22px;border-radius:16px;background:linear-gradient(135deg,rgba(242,140,40,.12),rgba(242,140,40,.02));border:1px solid rgba(242,140,40,.3)}
+  .auto li{font-size:14.5px;padding-left:20px;position:relative}
+  .auto li::before{content:"";position:absolute;left:2px;top:9px;width:8px;height:8px;background:var(--green)}
+  .example{margin-top:16px;padding:20px 22px;background:var(--paper);border-left:6px solid var(--green)}
   .example h4{margin:0 0 8px!important}
-  .example p{font-size:15.5px;color:var(--text)}
+  .example p{font-size:15.5px}
   .dr-foot{display:flex;justify-content:space-between;align-items:center;gap:16px;margin-top:30px;flex-wrap:wrap}
+  .drawer .btn.primary:hover{background:#000;color:#fff;border-color:#000}
   .dr-nav{display:flex;gap:8px}
-  .dr-nav button{width:44px;height:44px;border-radius:50%;border:1px solid var(--line-2);background:transparent;cursor:pointer;font-size:16px;transition:background .2s,border-color .2s}
-  .dr-nav button:hover{border-color:var(--orange);background:rgba(242,140,40,.15)}
+  .dr-nav button{width:44px;height:44px;border:1px solid #000;background:#fff;cursor:pointer;font-size:16px;transition:background .2s,color .2s}
+  .dr-nav button:hover{background:#000;color:#fff}
   @keyframes subIn{from{opacity:0;transform:translateX(24px)}to{opacity:1;transform:none}}
-  .drawer.open .swap > *{animation:subIn .6s cubic-bezier(.2,.7,.2,1) both}
-  .drawer.open .swap > *:nth-child(2){animation-delay:.05s}.drawer.open .swap > *:nth-child(3){animation-delay:.1s}.drawer.open .swap > *:nth-child(4){animation-delay:.15s}
-  .drawer.open .swap .sub{animation:subIn .55s cubic-bezier(.2,.7,.2,1) both;animation-delay:calc(.25s + var(--i) * .06s)}
+  .drawer.open .swap > *{animation:subIn .5s cubic-bezier(.2,.7,.2,1) both}
+  .drawer.open .swap .sub{animation-delay:calc(.2s + var(--i) * .05s)}
 
-  /* Reel */
-  .reel{position:relative;aspect-ratio:16/9;border-radius:24px;overflow:hidden;background:#0B1F3A;border:1px solid var(--line);box-shadow:0 60px 120px -60px rgba(242,140,40,.45)}
-  .reel canvas{display:block;width:100%;height:100%;cursor:pointer}
-  .reel-btn{position:absolute;right:18px;bottom:18px;width:42px;height:42px;border-radius:50%;border:0;background:rgba(255,255,255,.14);color:#fff;font-size:13px;cursor:pointer;backdrop-filter:blur(6px);opacity:0;transition:opacity .3s,background .3s}
-  .reel:hover .reel-btn,.reel-btn:focus-visible{opacity:1}
-  .reel-btn:hover{background:rgba(242,140,40,.85)}
+  /* Approach */
+  .process{display:grid;grid-template-columns:repeat(4,1fr);gap:0}
+  .pstep{padding:0 28px 0 0;position:relative}
+  .pstep .bar{height:6px;background:var(--grey-1);margin-bottom:28px;position:relative;overflow:hidden}
+  .pstep .bar::after{content:"";position:absolute;inset:0;background:var(--green);transform:scaleX(0);transform-origin:0 50%;transition:transform 1s cubic-bezier(.2,.7,.2,1);transition-delay:var(--d,0s)}
+  .pstep.shown .bar::after{transform:scaleX(1)}
+  .pstep .n{font:500 13px var(--mono);color:var(--green-d);letter-spacing:.12em}
+  .pstep h3{font-size:26px;margin:10px 0 10px}
+  .pstep p{color:var(--grey-4);font-size:15px}
+  .pstep .wk{display:inline-block;margin-top:14px;font:500 11px var(--mono);letter-spacing:.1em;text-transform:uppercase;border:1px solid #000;padding:4px 9px}
 
-  /* Process */
-  .process{display:grid;grid-template-columns:repeat(4,1fr);border-top:1px solid var(--line)}
-  .pstep{padding:30px 26px 0 0;position:relative}
-  .pstep::before{content:"";position:absolute;top:-1px;left:0;height:2px;width:0;background:linear-gradient(90deg,var(--orange),var(--amber));transition:width 1.2s cubic-bezier(.2,.7,.2,1);transition-delay:var(--d,0s)}
-  .pstep.shown::before{width:calc(100% - 26px)}
-  .pstep .n{font:600 64px var(--display);color:transparent;-webkit-text-stroke:1px var(--line-2);line-height:1;transition:-webkit-text-stroke-color .6s}
-  .pstep.shown .n{-webkit-text-stroke-color:rgba(242,140,40,.7)}
-  .pstep h3{font-size:28px;line-height:1.05;margin:16px 0 8px}
-  .pstep p{color:var(--text-2);font-size:15px}
+  /* Team */
+  .team{display:grid;grid-template-columns:1fr 1fr;gap:24px}
+  .person{display:grid;grid-template-columns:160px 1fr;gap:28px;padding:32px;background:#111;border:1px solid #262626}
+  .person img,.person .ph{width:160px;height:200px;object-fit:cover;object-position:center 18%;filter:grayscale(1);transition:filter .4s;display:block;background:#222}
+  .person:hover img{filter:none}
+  .person .role{font:500 11px var(--mono);letter-spacing:.14em;text-transform:uppercase;color:var(--green);margin-bottom:8px}
+  .person h3{font-size:26px;margin-bottom:12px}
+  .person p{color:#bdbdbd;font-size:14.5px}
+  .person .creds{display:flex;flex-wrap:wrap;gap:6px;margin-top:16px}
+  .person .creds span{font:400 11px var(--mono);border:1px solid #3a3a3a;padding:4px 9px;color:#aaa}
+  .person .ml{display:inline-block;margin-top:16px;font-size:14px;font-weight:600;text-decoration:none;border-bottom:2px solid var(--green)}
 
-  /* Partners */
-  .partners{display:grid;gap:20px}
-  .partner{display:grid;grid-template-columns:280px 1fr;gap:56px;align-items:center;padding:52px 56px;border-radius:28px;position:relative;overflow:hidden;
-    background:linear-gradient(115deg,rgba(242,140,40,.10),transparent 42%),var(--surface);border:1px solid var(--line)}
-  .partner.flip{grid-template-columns:1fr 280px}
-  .partner.flip .p-photo{order:2}
-  .partner::after{content:attr(data-initial);position:absolute;right:28px;bottom:-60px;font:italic 500 300px/1 var(--display);color:rgba(255,255,255,.025);pointer-events:none}
-  .partner.flip::after{right:auto;left:28px}
-  .p-photo{position:relative;width:100%;max-width:280px;aspect-ratio:1;justify-self:center}
-  .p-photo::before{content:"";position:absolute;inset:-12px;border-radius:50%;
-    background:conic-gradient(from 0deg,var(--orange),var(--amber),var(--teal),transparent 60%,var(--orange));
-    -webkit-mask:radial-gradient(farthest-side,transparent calc(100% - 2px),#000 calc(100% - 2px));mask:radial-gradient(farthest-side,transparent calc(100% - 2px),#000 calc(100% - 2px));
-    animation:spin 10s linear infinite}
-  .partner.flip .p-photo::before{animation-direction:reverse}
-  @keyframes spin{to{transform:rotate(360deg)}}
-  .p-photo .disc{position:absolute;inset:0;border-radius:50%;overflow:hidden;background:radial-gradient(circle at 30% 25%,var(--amber),var(--orange) 55%,#9a4a0c);
-    box-shadow:0 0 0 8px rgba(242,140,40,.08),0 40px 110px -24px rgba(242,140,40,.7);display:grid;place-items:center;color:#05080F;font:600 72px var(--display)}
-  .p-photo img{width:100%;height:100%;object-fit:cover;object-position:center 18%;display:block;transition:transform .8s cubic-bezier(.2,.7,.2,1)}
-  .partner:hover .p-photo img{transform:scale(1.05)}
-  .p-body{position:relative;z-index:1}
-  .p-body .role{font:500 11.5px var(--mono);letter-spacing:.16em;text-transform:uppercase;color:var(--amber);margin-bottom:10px}
-  .p-body h3{font-size:clamp(40px,4.4vw,62px);line-height:1.06;font-weight:600;margin-bottom:22px}
-  .p-body h3 em{color:var(--orange)}
-  .p-body > p{font-size:17px;color:var(--text);line-height:1.65;max-width:62ch}
-  .leads{margin:26px 0 22px;border-top:1px solid var(--line);padding-top:18px}
-  .leads h4{font:600 11px var(--mono);letter-spacing:.14em;text-transform:uppercase;color:var(--muted);margin-bottom:12px}
-  .leads div{display:flex;flex-wrap:wrap;gap:8px}
-  .lead-chip{font:500 13px var(--sans);border:1px solid rgba(242,140,40,.35);background:rgba(242,140,40,.07);color:var(--text);
-    border-radius:999px;padding:7px 14px;cursor:pointer;transition:background .25s,border-color .25s,transform .25s}
-  .lead-chip:hover,.lead-chip:focus-visible{background:rgba(242,140,40,.2);border-color:var(--orange);transform:translateY(-2px)}
-  .lead-chip.static{cursor:default;border-color:var(--line-2);background:transparent}
-  .lead-chip.static:hover{transform:none;background:transparent;border-color:var(--line-2)}
-  .creds{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 22px}
-  .creds span{font:400 11.5px var(--mono);border:1px solid var(--line-2);border-radius:999px;padding:5px 11px;color:var(--text-2)}
-  .mlinks{display:flex;gap:22px;flex-wrap:wrap;font-size:14px;font-weight:600}
-  .mlinks a{text-decoration:none;background:linear-gradient(var(--orange),var(--orange)) no-repeat 0 100%/0 1px;transition:background-size .3s}
-  .mlinks a:hover{background-size:100% 1px}
-  .standard{margin-top:18px;display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--line);border:1px solid var(--line);border-radius:20px;overflow:hidden}
-  .standard div{background:rgba(5,8,15,.6);padding:24px 26px}
-  .standard b{display:block;font:700 17px var(--display);margin-bottom:6px}
-  .standard b::before{content:"◆ ";color:var(--orange);font-size:11px;vertical-align:2px}
-  .standard span{font-size:14.5px;color:var(--text-2)}
-  @media (max-width:1000px){.partner,.partner.flip{grid-template-columns:1fr;gap:36px;padding:40px 32px}.partner.flip .p-photo{order:0}.p-photo{max-width:220px;justify-self:start}}
-  @media (max-width:640px){.partner,.partner.flip{padding:30px 22px}.p-photo{max-width:180px}.partner::after{font-size:200px}.standard{grid-template-columns:1fr}}
   /* CTA */
-  .cta{position:relative;border-radius:6px;padding:80px 64px;overflow:hidden;border:1px solid rgba(242,140,40,.35);
-    background:radial-gradient(800px circle at 85% 0%,rgba(242,140,40,.28),transparent 55%),radial-gradient(600px circle at 0% 100%,rgba(54,194,180,.14),transparent 55%),var(--bg-2)}
-  .cta h2{font-size:clamp(40px,5.4vw,76px);line-height:1.06;font-weight:600;max-width:24ch}
-  .cta p{color:var(--text-2);font-size:18px;margin:18px 0 32px;max-width:52ch}
-  .cta .mail{font:500 14px var(--mono);color:var(--text-2);margin-left:8px}
+  .cta{background:var(--green);color:#000;padding:96px 0}
+  .cta-grid{display:grid;grid-template-columns:1.3fr 1fr;gap:48px;align-items:end}
+  .cta h2{font-size:clamp(36px,4.8vw,64px);font-weight:800}
+  .cta p{font-size:18px;margin-bottom:28px;max-width:46ch}
+  .cta .mail{display:inline-block;margin-left:16px;font:500 14px var(--mono);text-decoration:none;border-bottom:1px solid #000}
 
-  footer{border-top:1px solid var(--line);padding:32px 0;font:400 12px var(--mono);letter-spacing:.06em;color:var(--muted)}
+  footer{background:#000;color:#999;padding:40px 0;font-size:13px}
   footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
   footer a{text-decoration:none}
-  footer a:hover{color:#fff}
+  footer a:hover{color:var(--green)}
 
   /* ---------- Motion ---------- */
-  @keyframes rise{from{opacity:0;transform:translateY(30px);filter:blur(8px)}to{opacity:1;transform:none;filter:none}}
-  .in{animation:rise 1.1s cubic-bezier(.2,.7,.2,1) both}
-  .d1{animation-delay:.5s}.d2{animation-delay:.7s}.d3{animation-delay:.95s}.d4{animation-delay:1.15s}.d5{animation-delay:1.35s}
-  .js .reveal{opacity:1;translate:0 30px;transition:opacity .9s cubic-bezier(.2,.7,.2,1),translate .9s cubic-bezier(.2,.7,.2,1),transform .35s cubic-bezier(.2,.7,.2,1),border-color .35s,background .35s;transition-delay:var(--d,0s),var(--d,0s),0s,0s,0s}
+  .js .reveal{opacity:0;translate:0 24px;transition:opacity .8s cubic-bezier(.2,.7,.2,1),translate .8s cubic-bezier(.2,.7,.2,1),border-color .25s,transform .25s,background .25s;transition-delay:var(--d,0s),var(--d,0s),0s,0s,0s}
   .js .reveal.shown{opacity:1;translate:0 0}
 
   /* ---------- Responsive ---------- */
   @media (max-width:1100px){
     .cases{grid-template-columns:repeat(2,1fr)}
-    .members{grid-template-columns:1fr 1fr}
-    .process{grid-template-columns:1fr 1fr;row-gap:40px}
+    .services{grid-template-columns:1fr 1fr}
+    .svc:nth-child(2){border-right:0}
+    .svc:nth-child(-n+2){border-bottom:1px solid var(--grey-1)}
+    .process{grid-template-columns:1fr 1fr;row-gap:44px}
+    .team{grid-template-columns:1fr}
   }
-  @media (max-width:820px){
+  @media (max-width:900px){
+    .hero-grid,.pov-grid,.cta-grid{grid-template-columns:1fr}
+    .hero{padding-top:64px}
+    .proof{grid-template-columns:1fr 1fr;margin-top:56px}
+    .proof div:nth-child(3){padding-left:0;border-left:0}
+    .proof div:nth-child(n+3){border-top:1px solid #2a2a2a}
     .links a.hide-m{display:none}
-    .pillars,.members{grid-template-columns:1fr}
-    .hero-foot{grid-template-columns:1fr 1fr}
-    section{padding:84px 0}
-    .cta{padding:48px 28px}
+    section{padding:80px 0}
     .drawer-body{padding:28px 22px 40px}
   }
   @media (max-width:560px){
     .wrap{padding:0 16px}
     .links{gap:12px}
     .links .btn{display:none}
-    .cases,.process{grid-template-columns:1fr}
-    .statement{font-size:calc((100vw - 32px) * .128);white-space:normal}
-    #cases .sec-head h2,#process .sec-head h2{white-space:normal;font-size:clamp(40px,11vw,56px)}
-    .hero-foot div{padding:14px}
+    .cases,.process,.services,.proof{grid-template-columns:1fr}
+    .svc{border-right:0!important;border-bottom:1px solid var(--grey-1)}
+    .proof div{padding-left:0!important;border-left:0!important;border-top:1px solid #2a2a2a}
+    .person{grid-template-columns:1fr;padding:24px}
+    .person img,.person .ph{width:120px;height:150px}
+    .cta .mail{display:block;margin:16px 0 0}
   }
   @media (prefers-reduced-motion:reduce){
     *,*::before,*::after{animation:none!important;transition:none!important}
     .js .reveal{opacity:1;translate:none}
-    .pstep::before{width:calc(100% - 26px)}
+    .pstep .bar::after{transform:scaleX(1)}
   }
 </style>
 </head>
 <body>
-<div class="progress" id="progress" aria-hidden="true"></div>
 
 <header>
   <div class="wrap">
     <nav>
-      <a class="logo" href="#top" aria-label="PRIZMA BI">
-        <svg width="26" height="26" viewBox="0 0 32 32" aria-hidden="true"><path d="M16 3 L29 27 H3 Z" fill="none" stroke="#fff" stroke-width="2"/><path d="M16 12 L22 24 H10 Z" fill="#FFB547"/></svg>
-        PRIZMA <span>BI</span>
-      </a>
+      <a class="logo" href="#top" aria-label="PRIZMA BI">PRIZMA<span>&nbsp;BI</span><i aria-hidden="true"></i></a>
       <div class="links">
-        <a class="hide-m" href="#model" data-i18n="nav_model">Model</a>
-        <a class="hide-m" href="#cases" data-i18n="nav_cases">Services</a>
-        <a class="hide-m" href="#process" data-i18n="nav_process">Process</a>
+        <a class="hide-m" href="#services" data-i18n="nav_services">Services</a>
+        <a class="hide-m" href="#cases" data-i18n="nav_cases">Use cases</a>
+        <a class="hide-m" href="#approach" data-i18n="nav_approach">Approach</a>
+        <a class="hide-m" href="#team" data-i18n="nav_team">Team</a>
         <div class="lang" role="group" aria-label="Language">
           <button type="button" data-lang="en" class="on">EN</button>
           <button type="button" data-lang="es">ES</button>
@@ -324,110 +274,163 @@
 
 <main id="top">
 
-  <!-- Hero: the opening film only. hero.mp4 if present, else prometheus.jpg (2.5D), else live WebGL (hero3d.js), else 2D (hero.js) -->
-  <section class="hero" id="hero" aria-label="PRIZMA BI">
-    <div class="hero-media" aria-hidden="true">
-      <canvas id="heroCanvas"></canvas>
-      <video id="heroVideo" autoplay muted loop playsinline preload="metadata">
-        <source src="hero.mp4" type="video/mp4">
-      </video>
+  <!-- Hero -->
+  <section class="hero dark" aria-labelledby="h1">
+    <div class="wrap">
+      <div class="hero-grid">
+        <div>
+          <span class="eyebrow" data-i18n="hero_eyebrow">AI consulting for finance</span>
+          <h1 id="h1" data-i18n-html="hero_title">AI for the finance function, <em>built by finance people.</em></h1>
+          <p class="lead" data-i18n="hero_lead">We are finance professionals who build AI. We design, implement and run AI and automation across reporting, close, consolidation, cash and planning, with the controls a CFO expects.</p>
+          <div class="ctas">
+            <a class="btn primary" href="#contact"><span data-i18n="hero_cta1">Book a diagnostic call</span><span class="arr">→</span></a>
+            <a class="btn outline" href="#cases"><span data-i18n="hero_cta2">See use cases</span></a>
+          </div>
+        </div>
+        <div class="hero-visual reveal">
+          <canvas id="heroPreview" aria-label="Sample AI-assisted management report, illustrative data"></canvas>
+          <div class="tag"><span data-i18n="hero_tag">AI-assisted management pack</span><b data-i18n="hero_tag2">● Illustrative data</b></div>
+        </div>
+      </div>
+      <div class="proof">
+        <div><b data-i18n="pf1_t">Finance-first</b><span data-i18n="pf1_d">We start from the ledger, not the tech stack.</span></div>
+        <div><b data-i18n="pf2_t">Human in the loop</b><span data-i18n="pf2_d">Every AI output is reviewed before it reaches you.</span></div>
+        <div><b data-i18n="pf3_t">Audit-ready</b><span data-i18n="pf3_d">Documented, traceable, controlled workflows.</span></div>
+        <div><b data-i18n="pf4_t">Your tools</b><span data-i18n="pf4_d">ERP, Excel, Power BI, banks. We integrate, not replace.</span></div>
+      </div>
     </div>
-    <div class="vignette" aria-hidden="true"></div>
-    <div class="scan" aria-hidden="true"></div>
   </section>
 
-  <!-- Showreel -->
-  <section id="reel-sec">
+  <!-- Point of view -->
+  <section class="pov" id="pov">
+    <div class="wrap">
+      <div class="pov-grid">
+        <div>
+          <span class="eyebrow" data-i18n="pv_eyebrow">Our point of view</span>
+          <blockquote data-i18n-html="pv_quote">Most AI projects in finance fail for <b>finance reasons</b>, not technical ones.</blockquote>
+        </div>
+        <div class="pov-list">
+          <div><span>01</span><div><b data-i18n="pv1_t">Bad data in, confident errors out</b><p data-i18n="pv1_d">AI on top of an unreconciled ledger only produces wrong answers faster. We fix the foundations first.</p></div></div>
+          <div><span>02</span><div><b data-i18n="pv2_t">Controls are not optional</b><p data-i18n="pv2_d">Segregation of duties, approvals and audit trails have to be designed into every automation, not added later.</p></div></div>
+          <div><span>03</span><div><b data-i18n="pv3_t">Value is measured in days and hours</b><p data-i18n="pv3_d">We prioritise the use cases that shorten the close, free up your team and improve decisions, and we measure them.</p></div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Services -->
+  <section id="services">
     <div class="wrap">
       <div class="sec-head">
-        <span class="eyebrow" data-i18n="rl_eyebrow">In motion</span>
-        <h2 data-i18n-html="rl_title">From chaos <em>to control.</em></h2>
+        <span class="eyebrow" data-i18n="sv_eyebrow">What we do</span>
+        <h2 data-i18n-html="sv_title">From AI strategy <em>to a finance function that runs on it.</em></h2>
+        <p data-i18n="sv_lead">Four ways to work with us. Start with a diagnostic, or bring us in where you need us most.</p>
       </div>
-      <div class="reel reveal">
-        <canvas id="reel" role="img" aria-label="PRIZMA BI showreel"></canvas>
-        <button type="button" class="reel-btn" aria-label="Pause">❚❚</button>
+      <div class="services">
+        <div class="svc reveal">
+          <span class="idx">01</span>
+          <div class="ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#86BC25" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M21 21l-5-5M8 11h6M11 8v6"/></svg></div>
+          <h3 data-i18n="sv1_t">AI strategy &amp; readiness</h3>
+          <p data-i18n="sv1_d">A clear, costed roadmap for AI in your finance function.</p>
+          <ul><li data-i18n="sv1_a">Finance process &amp; data diagnostic</li><li data-i18n="sv1_b">Use-case prioritisation &amp; business case</li><li data-i18n="sv1_c">AI governance &amp; risk framework</li></ul>
+        </div>
+        <div class="svc reveal">
+          <span class="idx">02</span>
+          <div class="ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#86BC25" stroke-width="2"><rect x="6" y="6" width="12" height="12"/><path d="M10 10h4v4h-4zM9 2v4M15 2v4M9 18v4M15 18v4M2 9h4M2 15h4M18 9h4M18 15h4"/></svg></div>
+          <h3 data-i18n="sv2_t">Automation &amp; AI agents</h3>
+          <p data-i18n="sv2_d">We build the workflows that take the manual work out of finance.</p>
+          <ul><li data-i18n="sv2_a">Reconciliations &amp; close automation</li><li data-i18n="sv2_b">AI agents for invoices, expenses &amp; queries</li><li data-i18n="sv2_c">AI-drafted commentary and variance analysis</li></ul>
+        </div>
+        <div class="svc reveal">
+          <span class="idx">03</span>
+          <div class="ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#86BC25" stroke-width="2"><path d="M3 21h18M6 17V10M11 17V6M16 17v-4M21 17V8"/></svg></div>
+          <h3 data-i18n="sv3_t">Data, BI &amp; reporting</h3>
+          <p data-i18n="sv3_d">One source of truth that people and AI can both rely on.</p>
+          <ul><li data-i18n="sv3_a">Finance data model &amp; integrations</li><li data-i18n="sv3_b">Power BI / Looker dashboards</li><li data-i18n="sv3_c">Forecasting &amp; scenario models</li></ul>
+        </div>
+        <div class="svc reveal">
+          <span class="idx">04</span>
+          <div class="ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#86BC25" stroke-width="2"><path d="M12 3l8 4v5c0 5-3.5 8-8 9-4.5-1-8-4-8-9V7z"/><path d="M8.5 12l2.5 2.5 4.5-5"/></svg></div>
+          <h3 data-i18n="sv4_t">Managed finance operations</h3>
+          <p data-i18n="sv4_d">We run it for you: a dedicated team plus AI, under partner oversight.</p>
+          <ul><li data-i18n="sv4_a">Bookkeeping, close &amp; reporting</li><li data-i18n="sv4_b">Cash management &amp; FP&amp;A</li><li data-i18n="sv4_c">One invoice, monthly service KPIs</li></ul>
+        </div>
       </div>
     </div>
   </section>
 
   <!-- Use cases -->
-  <section id="cases">
+  <section id="cases" class="dark">
     <div class="wrap">
       <div class="sec-head">
-        <span class="eyebrow" data-i18n="cs_eyebrow">By use case</span>
-        <h2 data-i18n-html="cs_title">See exactly <em>what you'll receive.</em></h2>
-        <p data-i18n="cs_lead">Every service below is a real deliverable. Open any of them to see a live sample, the sub-services included and how we automate it.</p>
+        <span class="eyebrow" data-i18n="cs_eyebrow">Use cases</span>
+        <h2 data-i18n-html="cs_title">Where AI pays off <em>in finance.</em></h2>
+        <p data-i18n="cs_lead">Each use case is a real deliverable. Open one to see a sample output, what's included and exactly what the AI layer does.</p>
       </div>
       <div class="cases" id="cases-grid"></div>
     </div>
   </section>
 
-  <div class="marquee" aria-hidden="true"><div class="track" id="track"></div></div>
-
-  <!-- Model -->
-  <section id="model">
+  <!-- Approach -->
+  <section id="approach">
     <div class="wrap">
       <div class="sec-head">
-        <span class="eyebrow" data-i18n="md_eyebrow">The model</span>
-        <h1 class="statement" data-i18n-html="hero_title">Classic rigour. <em>New intelligence.</em></h1>
-        <div class="statement-row">
-          <p data-i18n="hero_lead">Your finance department as a service: a dedicated finance team, senior partner oversight and custom AI automation. You decide, we execute.</p>
-          <a class="btn primary" href="#contact"><span data-i18n="hero_cta1">Book a call</span><span class="arr">→</span></a>
-        </div>
+        <span class="eyebrow" data-i18n="ap_eyebrow">Our approach</span>
+        <h2 data-i18n-html="ap_title">Start small. Prove value. <em>Then scale.</em></h2>
       </div>
-      <div class="pillars">
-        <div class="card pillar">
-          <span class="idx">[ 01 ]</span>
-          <div class="ic"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#F28C28" stroke-width="1.8"><circle cx="9" cy="8" r="3.5"/><path d="M2.5 20c.8-3.6 3.4-5.5 6.5-5.5s5.7 1.9 6.5 5.5"/><circle cx="17.5" cy="9" r="2.5"/><path d="M16 14.6c2.6.1 4.6 1.8 5.3 5.4"/></svg></div>
-          <h3 data-i18n="p1_t">Dedicated talent</h3>
-          <p data-i18n="p1_d">Qualified finance professionals working remotely as part of your team, in your language and your time zone. We recruit, train and, if needed, replace.</p>
-        </div>
-        <div class="card pillar">
-          <span class="idx">[ 02 ]</span>
-          <div class="ic"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#F28C28" stroke-width="1.8"><path d="M12 3l8 4v5c0 5-3.5 8-8 9-4.5-1-8-4-8-9V7z"/><path d="M8.5 12l2.5 2.5 4.5-5"/></svg></div>
-          <h3 data-i18n="p2_t">Senior oversight</h3>
-          <p data-i18n="p2_d">Partners with backgrounds in economics, tax and financial control review every deliverable. Documented processes, control points and a single point of contact.</p>
-        </div>
-        <div class="card pillar">
-          <span class="idx">[ 03 ]</span>
-          <div class="ic"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#F28C28" stroke-width="1.8"><rect x="6" y="6" width="12" height="12" rx="2"/><path d="M10 10h4v4h-4zM9 2v4M15 2v4M9 18v4M15 18v4M2 9h4M2 15h4M18 9h4M18 15h4"/></svg></div>
-          <h3 data-i18n="p3_t">Engineering & AI</h3>
-          <p data-i18n="p3_d">Our software engineer automates the repetitive and integrates your tools: reconciliations, reporting and alerts that run on their own, with human control.</p>
-        </div>
-      </div>
-      <div class="strip reveal">
-        <p data-i18n="strip">One invoice. No HR admin. No surprises.</p>
-        <span data-i18n="strip_s">You decide · we execute</span>
+      <div class="process">
+        <div class="pstep"><div class="bar"></div><span class="n">01</span><h3 data-i18n="s1_t">Assess</h3><p data-i18n="s1_d">We map your processes, data and controls, and identify where AI creates real value.</p><span class="wk" data-i18n="s1_w">2–3 weeks</span></div>
+        <div class="pstep"><div class="bar"></div><span class="n">02</span><h3 data-i18n="s2_t">Pilot</h3><p data-i18n="s2_d">We build one high-impact use case on your real data and measure the result.</p><span class="wk" data-i18n="s2_w">4–6 weeks</span></div>
+        <div class="pstep"><div class="bar"></div><span class="n">03</span><h3 data-i18n="s3_t">Scale</h3><p data-i18n="s3_d">We extend what works across entities and processes, with controls and documentation.</p><span class="wk" data-i18n="s3_w">Quarter by quarter</span></div>
+        <div class="pstep"><div class="bar"></div><span class="n">04</span><h3 data-i18n="s4_t">Run</h3><p data-i18n="s4_d">We operate and improve it with you, or hand it over to your team, fully trained.</p><span class="wk" data-i18n="s4_w">Ongoing</span></div>
       </div>
     </div>
   </section>
 
-  <!-- Process -->
-  <section id="process">
+  <!-- Team -->
+  <section id="team" class="dark">
     <div class="wrap">
       <div class="sec-head">
-        <span class="eyebrow" data-i18n="pr_eyebrow">Process</span>
-        <h2 data-i18n-html="pr_title">From the first call <em>to a working team.</em></h2>
+        <span class="eyebrow" data-i18n="tm_eyebrow">Leadership</span>
+        <h2 data-i18n-html="tm_title">Finance judgement <em>behind every model.</em></h2>
+        <p data-i18n="tm_lead">PRIZMA is led by partners who have run finance functions. Every automation and every AI output is signed off by one of them.</p>
       </div>
-      <div class="process">
-        <div class="pstep"><div class="n">01</div><h3 data-i18n="s1_t">Diagnosis</h3><p data-i18n="s1_d">We review your processes, tools and needs, and define the scope.</p></div>
-        <div class="pstep"><div class="n">02</div><h3 data-i18n="s2_t">Team</h3><p data-i18n="s2_d">We recruit and train your dedicated team on your systems and ways of working.</p></div>
-        <div class="pstep"><div class="n">03</div><h3 data-i18n="s3_t">Automation</h3><p data-i18n="s3_d">We automate the repetitive and integrate your systems for speed and accuracy.</p></div>
-        <div class="pstep"><div class="n">04</div><h3 data-i18n="s4_t">Control</h3><p data-i18n="s4_d">Senior oversight, service KPIs and continuous improvement every month.</p></div>
+      <div class="team">
+        <article class="person reveal">
+          <img src="rocio.png" alt="Rocío Marín Martínez" onerror="this.outerHTML='<div class=ph></div>'">
+          <div>
+            <div class="role" data-i18n="tm_r_role">Partner · Reporting, close &amp; tax</div>
+            <h3>Rocío Marín Martínez</h3>
+            <p data-i18n="tm_r_bio">Economist with master's degrees in accounting &amp; finance and in tax. She has run the accounting and finance department of a multi-company group, from month-end close and reporting to banks and audit. At PRIZMA she owns the quality of every close, report and filing.</p>
+            <div class="creds"><span data-i18n="tm_c1">BSc Economics · Univ. Zaragoza</span><span data-i18n="tm_c2">MSc Accounting &amp; Finance</span><span data-i18n="tm_c3">MSc Tax Advisory</span><span data-i18n="tm_c4">MSc Digital Business · EOI</span></div>
+            <a class="ml" href="https://www.linkedin.com/in/rociomarin-canelahome" target="_blank" rel="noopener">LinkedIn →</a>
+          </div>
+        </article>
+        <article class="person reveal">
+          <img src="javier.png" alt="Javier Munoz" onerror="this.outerHTML='<div class=ph></div>'">
+          <div>
+            <div class="role" data-i18n="tm_j_role">Partner · Controls, cash &amp; AI automation</div>
+            <h3>Javier Munoz, CFE</h3>
+            <p data-i18n="tm_j_bio">Certified Fraud Examiner. His focus is what makes finance trustworthy: controls, cash and group structures. He leads PRIZMA's AI and automation practice, turning repetitive finance work into supervised, auditable workflows.</p>
+            <div class="creds"><span>Certified Fraud Examiner (CFE)</span></div>
+            <a class="ml" href="mailto:javier.munoz@prizma.bi">javier.munoz@prizma.bi</a>
+          </div>
+        </article>
       </div>
     </div>
   </section>
 
   <!-- Contact -->
-  <section id="contact" style="padding-top:0">
+  <section id="contact" class="cta">
     <div class="wrap">
-      <div class="cta reveal">
-        <span class="eyebrow" data-i18n="ct_eyebrow">Contact</span>
-        <h2 data-i18n="ct_title">Shall we talk about your finance department?</h2>
-        <p data-i18n="ct_lead">In 30 minutes we'll see what you need and how we'd cover it. No strings attached.</p>
-        <!-- TODO: replace with the real Calendly / Google Calendar link -->
-        <a class="btn primary" href="https://calendly.com/REPLACE-ME/30min" target="_blank" rel="noopener"><span data-i18n="ct_cta">Book a 30-min call</span><span class="arr">→</span></a>
-        <a class="mail" href="mailto:hola@prizma.bi">hola@prizma.bi</a>
+      <div class="cta-grid">
+        <h2 data-i18n="ct_title">Where would AI make the biggest difference in your finance team?</h2>
+        <div>
+          <p data-i18n="ct_lead">In a 30-minute diagnostic call we'll identify your top two or three AI opportunities. No strings attached.</p>
+          <!-- TODO: replace with the real Calendly / Google Calendar link -->
+          <a class="btn black" href="https://calendly.com/REPLACE-ME/30min" target="_blank" rel="noopener"><span data-i18n="ct_cta">Book a 30-min call</span><span class="arr">→</span></a>
+          <a class="mail" href="mailto:hola@prizma.bi">hola@prizma.bi</a>
+        </div>
       </div>
     </div>
   </section>
@@ -444,8 +447,8 @@
 
 <footer>
   <div class="wrap">
-    <span>© <span id="yr"></span> PRIZMA BI</span>
-    <span><a href="https://www.linkedin.com/company/prizmabi/" target="_blank" rel="noopener">LINKEDIN</a> &nbsp;·&nbsp; <a href="https://www.youtube.com/@PrizmaBI" target="_blank" rel="noopener">YOUTUBE</a> &nbsp;·&nbsp; <a href="mailto:hola@prizma.bi">HOLA@PRIZMA.BI</a></span>
+    <span>© <span id="yr"></span> PRIZMA BI · <span data-i18n="ft_tag">AI consulting for finance</span></span>
+    <span><a href="https://www.linkedin.com/company/prizmabi/" target="_blank" rel="noopener">LinkedIn</a> &nbsp;·&nbsp; <a href="https://www.youtube.com/@PrizmaBI" target="_blank" rel="noopener">YouTube</a> &nbsp;·&nbsp; <a href="mailto:hola@prizma.bi">hola@prizma.bi</a></span>
   </div>
 </footer>
 
@@ -453,124 +456,89 @@
 // Spanish copy; English lives in the HTML and is captured below.
 const T = {
   es: {
-    nav_model:"Modelo", nav_cases:"Servicios", nav_process:"Proceso", nav_team:"Socios", nav_cta:"Hablemos",
-    hero_eyebrow:"Finanzas · Talento · IA",
-    hero_title:"Rigor clásico. <em>Inteligencia nueva.</em>",
-    hero_lead:"Tu departamento financiero como servicio: un equipo financiero dedicado, supervisión de socios senior y automatización con IA a medida. Tú decides, nosotros ejecutamos.",
-    hero_cta1:"Agenda una llamada", hero_cta2:"Mira lo que recibes",
-    hf1:"Equipo financiero dedicado", hf2:"Supervisión senior", hf3:"Automatización e IA a medida", hf4:"Una sola factura",
-    md_eyebrow:"El modelo", md_title:"Tres capas. <em>Un departamento financiero.</em>",
-    md_lead:"Combinamos talento, criterio y tecnología para que tengas un equipo financiero completo sin tener que construirlo.",
-    p1_t:"Talento dedicado", p1_d:"Profesionales financieros cualificados que trabajan en remoto como parte de tu equipo, en tu idioma y tu horario. Nosotros seleccionamos, formamos y, si hace falta, sustituimos.",
-    p2_t:"Supervisión senior", p2_d:"Socios con formación en economía, fiscalidad y control financiero revisan cada entrega. Procesos documentados, puntos de control y un único interlocutor.",
-    p3_t:"Ingeniería e IA", p3_d:"Nuestro ingeniero de software automatiza lo repetitivo e integra tus herramientas: conciliaciones, reporting y alertas que funcionan solos, con control humano.",
-    strip:"Una sola factura. Sin gestión laboral. Sin sorpresas.", strip_s:"Tú decides · nosotros ejecutamos",
-    cs_eyebrow:"Por caso de uso", cs_title:"Mira exactamente <em>lo que vas a recibir.</em>",
-    cs_lead:"Cada servicio es un entregable real. Abre cualquiera para ver un ejemplo en vivo, los subservicios incluidos y cómo lo automatizamos.",
-    rl_eyebrow:"En movimiento", rl_title:"Del caos <em>al control.</em>",
-    pr_eyebrow:"Proceso", pr_title:"De la primera llamada <em>a un equipo funcionando.</em>",
-    s1_t:"Diagnóstico", s1_d:"Analizamos tus procesos, herramientas y necesidades, y definimos el alcance.",
-    s2_t:"Equipo", s2_d:"Seleccionamos y formamos a tu equipo dedicado en tus sistemas y tu forma de trabajar.",
-    s3_t:"Automatización", s3_d:"Automatizamos lo repetitivo e integramos tus sistemas para ganar velocidad y precisión.",
-    s4_t:"Control", s4_d:"Supervisión senior, KPIs de servicio y mejora continua cada mes.",
-    tm_eyebrow:"Los socios", tm_title:"Criterio senior <em>en cada entrega.</em>",
-    tm_lead:"Dos socios, un mismo estándar. Cada informe, conciliación y modelo que entrega tu equipo lo revisa alguien que ha dirigido un departamento financiero.",
-    tm_r_role:"Cofundadora · Reporting, cierre y fiscalidad",
-    tm_r_bio:"Economista con másteres en dirección contable y financiera y en asesoría fiscal. Ha dirigido el departamento de contabilidad y finanzas de un grupo de empresas, del cierre mensual y el reporting a los bancos y la auditoría, y asesora fiscalmente a empresas desde 2019. En PRIZMA responde de la calidad de cada cierre, informe y declaración, y es la socia con la que los clientes hablan cada semana.",
-    tm_leads:"Lidera en PRIZMA",
-    tm_r_l1:"Reporting de gestión", tm_r_l2:"Contabilidad y cierre", tm_r_l3:"Presupuestos", tm_r_l4:"Fiscalidad y cumplimiento",
-    tm_j_role:"Cofundador · Control, tesorería y finanzas de grupo",
-    tm_j_bio:"Certified Fraud Examiner. Su foco es lo que hace fiable un departamento financiero: control, caja y estructuras de grupo. Trabaja en tesorería y previsión de caja, estructuración de grupos multisociedad y control financiero, y lidera la hoja de ruta de automatización de PRIZMA: convertir el trabajo financiero repetitivo en flujos supervisados y auditables.",
-    tm_j_l1:"Previsión de tesorería", tm_j_l2:"Reporting consolidado", tm_j_l3:"Reporting a inversores y consejo", tm_j_l4:"Control y automatización con IA",
+    nav_services:"Servicios", nav_cases:"Casos de uso", nav_approach:"Enfoque", nav_team:"Equipo", nav_cta:"Hablemos",
+    hero_eyebrow:"Consultoría de IA para finanzas",
+    hero_title:"IA para la función financiera, <em>hecha por gente de finanzas.</em>",
+    hero_lead:"Somos profesionales de finanzas que construimos IA. Diseñamos, implantamos y operamos IA y automatización en reporting, cierre, consolidación, tesorería y planificación, con los controles que exige un CFO.",
+    hero_cta1:"Agenda una llamada de diagnóstico", hero_cta2:"Ver casos de uso",
+    hero_tag:"Pack de gestión asistido por IA", hero_tag2:"● Datos ilustrativos",
+    pf1_t:"Primero las finanzas", pf1_d:"Empezamos por la contabilidad, no por la tecnología.",
+    pf2_t:"Supervisión humana", pf2_d:"Cada resultado de la IA se revisa antes de llegarte.",
+    pf3_t:"Listo para auditoría", pf3_d:"Flujos documentados, trazables y controlados.",
+    pf4_t:"Tus herramientas", pf4_d:"ERP, Excel, Power BI, bancos. Integramos, no sustituimos.",
+    pv_eyebrow:"Nuestra visión",
+    pv_quote:"La mayoría de proyectos de IA en finanzas fracasan por <b>razones financieras</b>, no técnicas.",
+    pv1_t:"Datos malos, errores con seguridad", pv1_d:"IA sobre una contabilidad sin conciliar solo da respuestas erróneas más rápido. Primero arreglamos los cimientos.",
+    pv2_t:"Los controles no son opcionales", pv2_d:"Segregación de funciones, aprobaciones y trazabilidad se diseñan dentro de cada automatización, no después.",
+    pv3_t:"El valor se mide en días y horas", pv3_d:"Priorizamos los casos que acortan el cierre, liberan a tu equipo y mejoran las decisiones, y los medimos.",
+    sv_eyebrow:"Qué hacemos", sv_title:"De la estrategia de IA <em>a un departamento financiero que funciona con ella.</em>",
+    sv_lead:"Cuatro formas de trabajar con nosotros. Empieza con un diagnóstico o llámanos donde más nos necesites.",
+    sv1_t:"Estrategia y madurez en IA", sv1_d:"Una hoja de ruta clara y valorada para la IA en tu función financiera.",
+    sv1_a:"Diagnóstico de procesos y datos financieros", sv1_b:"Priorización de casos de uso y business case", sv1_c:"Marco de gobierno y riesgos de IA",
+    sv2_t:"Automatización y agentes de IA", sv2_d:"Construimos los flujos que eliminan el trabajo manual en finanzas.",
+    sv2_a:"Automatización de conciliaciones y cierre", sv2_b:"Agentes de IA para facturas, gastos y consultas", sv2_c:"Comentarios y análisis de desviaciones redactados por IA",
+    sv3_t:"Datos, BI y reporting", sv3_d:"Una única fuente de verdad en la que confían personas e IA.",
+    sv3_a:"Modelo de datos financiero e integraciones", sv3_b:"Dashboards en Power BI / Looker", sv3_c:"Modelos de previsión y escenarios",
+    sv4_t:"Operaciones financieras gestionadas", sv4_d:"Lo operamos por ti: un equipo dedicado más IA, con supervisión de socios.",
+    sv4_a:"Contabilidad, cierre y reporting", sv4_b:"Tesorería y FP&A", sv4_c:"Una sola factura, KPIs de servicio mensuales",
+    cs_eyebrow:"Casos de uso", cs_title:"Dónde la IA rinde <em>en finanzas.</em>",
+    cs_lead:"Cada caso de uso es un entregable real. Abre uno para ver un ejemplo, qué incluye y qué hace exactamente la capa de IA.",
+    ap_eyebrow:"Nuestro enfoque", ap_title:"Empezar pequeño. Demostrar valor. <em>Después escalar.</em>",
+    s1_t:"Evaluar", s1_d:"Mapeamos tus procesos, datos y controles, e identificamos dónde la IA aporta valor real.", s1_w:"2–3 semanas",
+    s2_t:"Piloto", s2_d:"Construimos un caso de alto impacto con tus datos reales y medimos el resultado.", s2_w:"4–6 semanas",
+    s3_t:"Escalar", s3_d:"Extendemos lo que funciona a sociedades y procesos, con controles y documentación.", s3_w:"Trimestre a trimestre",
+    s4_t:"Operar", s4_d:"Lo operamos y mejoramos contigo, o lo traspasamos a tu equipo ya formado.", s4_w:"Continuo",
+    tm_eyebrow:"Liderazgo", tm_title:"Criterio financiero <em>detrás de cada modelo.</em>",
+    tm_lead:"PRIZMA está dirigida por socios que han llevado departamentos financieros. Cada automatización y cada resultado de la IA lo valida uno de ellos.",
+    tm_r_role:"Socia · Reporting, cierre y fiscalidad",
+    tm_r_bio:"Economista con másteres en dirección contable y financiera y en asesoría fiscal. Ha dirigido el departamento de contabilidad y finanzas de un grupo de empresas, del cierre mensual y el reporting a los bancos y la auditoría. En PRIZMA responde de la calidad de cada cierre, informe y declaración.",
     tm_c1:"Lic. Economía · Univ. Zaragoza", tm_c2:"Máster Dir. Contable y Financiera", tm_c3:"Máster Asesoría Fiscal", tm_c4:"Máster Digital Business · EOI",
-    st1_t:"Revisión de socio", st1_d:"Nada te llega sin la validación de un socio.",
-    st2_t:"Un único interlocutor", st2_d:"Un socio con nombre que conoce tus números y tu negocio.",
-    st3_t:"Documentado y auditable", st3_d:"Cada proceso por escrito, cada automatización trazable.",
-    ct_eyebrow:"Contacto", ct_title:"¿Hablamos de tu departamento financiero?",
-    ct_lead:"En 30 minutos vemos qué necesitas y cómo lo cubriríamos. Sin compromiso.",
-    ct_cta:"Agendar llamada de 30 min"
+    tm_j_role:"Socio · Control, tesorería y automatización con IA",
+    tm_j_bio:"Certified Fraud Examiner. Su foco es lo que hace fiables las finanzas: control, caja y estructuras de grupo. Lidera la práctica de IA y automatización de PRIZMA: convertir el trabajo financiero repetitivo en flujos supervisados y auditables.",
+    ct_title:"¿Dónde marcaría la IA la mayor diferencia en tu equipo financiero?",
+    ct_lead:"En una llamada de diagnóstico de 30 minutos identificamos tus dos o tres principales oportunidades de IA. Sin compromiso.",
+    ct_cta:"Agendar llamada de 30 min", ft_tag:"Consultoría de IA para finanzas"
   },
   en: {}
 };
 document.querySelectorAll('[data-i18n]').forEach(el => T.en[el.dataset.i18n] = el.textContent);
 document.querySelectorAll('[data-i18n-html]').forEach(el => T.en[el.dataset.i18nHtml] = el.innerHTML);
 
-const MARQUEE = {
-  en:["Management reporting","Investor & board","Consolidation","Budgeting","Cash flow","FP&A","Financial modelling","Bookkeeping","AI automation"],
-  es:["Reporting de gestión","Inversores y consejo","Consolidación","Presupuestos","Tesorería","FP&A","Modelización financiera","Contabilidad","Automatización con IA"]
-};
-function fillMarquee(l){
-  const html = (MARQUEE[l] || MARQUEE.en).map(s => '<span>' + s + '</span>').join('');
-  document.getElementById('track').innerHTML = html + html;
-}
 function setLang(l){
   const d = T[l] || T.en;
   document.querySelectorAll('[data-i18n]').forEach(el => { if (d[el.dataset.i18n]) el.textContent = d[el.dataset.i18n]; });
   document.querySelectorAll('[data-i18n-html]').forEach(el => { if (d[el.dataset.i18nHtml]) el.innerHTML = d[el.dataset.i18nHtml]; });
   document.documentElement.lang = l;
   document.querySelectorAll('.lang button').forEach(b => b.classList.toggle('on', b.dataset.lang === l));
-  fillMarquee(l);
   if (window.PrizmaCases) window.PrizmaCases.render();
   try { localStorage.setItem('prizma-lang-v2', l); } catch(e){}
 }
 document.querySelectorAll('.lang button').forEach(b => b.addEventListener('click', () => setLang(b.dataset.lang)));
 let saved = null; try { saved = localStorage.getItem('prizma-lang-v2'); } catch(e){}
-setLang(saved === 'es' ? 'es' : 'en');   // English first; Spanish on request
+setLang(saved === 'es' ? 'es' : 'en');
 document.getElementById('yr').textContent = new Date().getFullYear();
 
-// ---------- Motion ----------
+// ---------- Reveal on scroll ----------
 const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
-const header = document.querySelector('header'), bar = document.getElementById('progress');
-const onScroll = () => {
-  header.classList.toggle('scrolled', scrollY > 20);
-  const h = document.documentElement.scrollHeight - innerHeight;
-  bar.style.transform = 'scaleX(' + (h > 0 ? scrollY / h : 0) + ')';
-};
-addEventListener('scroll', onScroll, {passive:true}); onScroll();
-
-const hero = document.getElementById('hero'), vid = document.getElementById('heroVideo');
-vid.addEventListener('loadeddata', () => hero.classList.add('has-video'));
-if (reduce) vid.removeAttribute('autoplay');
-
-
-document.querySelectorAll('.card').forEach(c => c.addEventListener('pointermove', e => {
-  const r = c.getBoundingClientRect();
-  c.style.setProperty('--mx', (e.clientX - r.left) + 'px');
-  c.style.setProperty('--my', (e.clientY - r.top) + 'px');
-}));
-
-const GLYPHS = '01<>/[]#$%&*+=';
-function decode(el){
-  const final = el.textContent; let f = 0;
-  const tick = () => {
-    el.textContent = [...final].map((ch, i) => i < f / 2 || ch === ' ' ? ch : GLYPHS[Math.floor(Math.random() * GLYPHS.length)]).join('');
-    if (f++ < final.length * 2) requestAnimationFrame(tick); else el.textContent = final;
-  };
-  tick();
-}
-
 let io = null;
 if ('IntersectionObserver' in window && !reduce) {
   io = new IntersectionObserver(es => es.forEach(e => {
     if (!e.isIntersecting) return;
     e.target.classList.add('shown');
-    const eb = e.target.querySelector && e.target.querySelector('.eyebrow');
-    if (eb) decode(eb);
     io.unobserve(e.target);
   }), {threshold: 0.12, rootMargin: '0px 0px -40px 0px'});
 }
 window.PrizmaReveal = els => els.forEach((el, i) => {
   el.classList.add('reveal');
-  if (el.parentElement && el.parentElement.matches('.pillars,.cases,.members,.process')) el.style.setProperty('--d', (i % 4) * 0.08 + 's');
+  if (el.parentElement && el.parentElement.matches('.services,.cases,.process,.team')) el.style.setProperty('--d', (i % 4) * 0.08 + 's');
   io ? io.observe(el) : el.classList.add('shown');
 });
-PrizmaReveal(document.querySelectorAll('.sec-head,.pillar,.pstep,.strip,.reel,.cta,.partner,.standard'));
-document.querySelectorAll('.lead-chip[data-case]').forEach(b => b.addEventListener('click', () => window.PrizmaCases && PrizmaCases.open(+b.dataset.case)));
+PrizmaReveal(document.querySelectorAll('.sec-head,.svc,.pstep,.person,.hero-visual,.pov-list'));
 </script>
-<script src="previews.js?v=1790586267"></script>
-<script src="cases.js?v=1790586267"></script>
-<script src="hero.js?v=1790586267"></script>
-<script type="module" src="hero3d.js?v=1790586267"></script>
-<script src="reel.js?v=1790586267"></script>
+<script src="previews.js?v=2"></script>
+<script src="cases.js?v=2"></script>
+<script>
+  if (window.PrizmaPreview) PrizmaPreview.mount(document.getElementById('heroPreview'), 'management');
+</script>
 </body>
 </html>

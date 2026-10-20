@@ -3,8 +3,8 @@
 // logical space. Data shown is illustrative.
 (() => {
   const LW = 800, LH = 500, LOOP = 8;
-  const C = { bg: '#0A1220', panel: '#0F1A2D', panel2: '#132238', line: 'rgba(255,255,255,.08)', line2: 'rgba(255,255,255,.16)',
-    text: '#E9EDF4', text2: '#B4BDCC', muted: '#7C879A', orange: '#F28C28', amber: '#FFB547', teal: '#36C2B4', red: '#FF6B5B', ice: '#7FB2FF' };
+  const C = { bg: '#111111', panel: '#1A1A1A', panel2: '#222222', line: 'rgba(255,255,255,.08)', line2: 'rgba(255,255,255,.16)',
+    text: '#F2F2F2', text2: '#BBBBBB', muted: '#8A8A8A', orange: '#86BC25', amber: '#A8D13A', teal: '#00ABAB', red: '#FF6B5B', ice: '#7FB2FF' };
   const MONO = '"Geist Mono", ui-monospace, Menlo, Consolas, monospace', DISP = 'Geist, "Helvetica Neue", Arial, sans-serif', UI = 'Geist, "Helvetica Neue", Arial, sans-serif';
   const clamp = (v, a = 0, b = 1) => Math.min(b, Math.max(a, v));
   const prog = (t, a, b) => clamp((t - a) / (b - a));
@@ -25,16 +25,16 @@
     ['#FF5F57', '#FEBC2E', '#28C840'].forEach((c, i) => { g.fillStyle = c; g.beginPath(); g.arc(22 + i * 18, 20, 5.5, 0, 6.3); g.fill(); });
     txt(g, title, 86, 25, 13, C.text2, 500, UI);
     if (tag) { g.font = `500 11px ${MONO}`; const w = g.measureText(tag).width + 18;
-      rr(g, LW - w - 16, 11, w, 19, 10); g.fillStyle = 'rgba(242,140,40,.15)'; g.fill();
+      rr(g, LW - w - 16, 11, w, 19, 10); g.fillStyle = 'rgba(134,188,37,.15)'; g.fill();
       txt(g, tag, LW - w - 7, 25, 11, C.amber, 500, MONO); }
   }
   function card(g, x, y, w, h) { rr(g, x, y, w, h, 12); g.fillStyle = C.panel; g.fill(); g.strokeStyle = C.line; g.lineWidth = 1; g.stroke(); }
   function fadeLoop(g, t) { const f = prog(t, LOOP - .45, LOOP); if (f > 0) { g.globalAlpha = f; g.fillStyle = C.bg; g.fillRect(0, 0, LW, LH); g.globalAlpha = 1; } }
   function cursor(g, x, y, click) {
     g.save(); g.translate(x, y);
-    if (click) { g.strokeStyle = 'rgba(242,140,40,.6)'; g.lineWidth = 2; g.beginPath(); g.arc(0, 0, 10 + click * 12, 0, 6.3); g.globalAlpha = 1 - click; g.stroke(); g.globalAlpha = 1; }
+    if (click) { g.strokeStyle = 'rgba(134,188,37,.6)'; g.lineWidth = 2; g.beginPath(); g.arc(0, 0, 10 + click * 12, 0, 6.3); g.globalAlpha = 1 - click; g.stroke(); g.globalAlpha = 1; }
     g.beginPath(); g.moveTo(0, 0); g.lineTo(0, 17); g.lineTo(4.5, 13); g.lineTo(8, 20); g.lineTo(10.5, 19); g.lineTo(7, 12); g.lineTo(12.5, 12); g.closePath();
-    g.fillStyle = '#fff'; g.fill(); g.strokeStyle = '#05080F'; g.lineWidth = 1.2; g.stroke(); g.restore();
+    g.fillStyle = '#fff'; g.fill(); g.strokeStyle = '#000000'; g.lineWidth = 1.2; g.stroke(); g.restore();
   }
 
   // 1 ── Management reporting: KPI tiles + actual vs budget bars + variances
@@ -70,13 +70,13 @@
       g.fillStyle = C.line; g.fillRect(524, y + 16, 238, 1);
       txt(g, n, 524 + (1 - p) * 20, y, 13, C.text, 500);
       txt(g, v, 762, y, 13, up ? C.teal : C.red, 700, MONO, 'right');
-      g.fillStyle = up ? 'rgba(54,194,180,.25)' : 'rgba(255,107,91,.25)';
+      g.fillStyle = up ? 'rgba(0,171,171,.25)' : 'rgba(255,107,91,.25)';
       g.fillRect(524, y + 6, 238 * (.2 + (i % 3) * .2) * p, 3);
       g.globalAlpha = 1;
     });
     const c = prog(t, 4.2, 5.2); if (c > 0 && c < 1) cursor(g, 600 + c * 80, 300 - c * 60);
     if (t > 5.2) { const k = prog(t, 5.2, 5.8); cursor(g, 680, 240, k); if (t > 5.4) {
-      rr(g, 540, 250, 230, 58, 10); g.fillStyle = '#1A2B45'; g.fill(); g.strokeStyle = C.orange; g.stroke();
+      rr(g, 540, 250, 230, 58, 10); g.fillStyle = '#262626'; g.fill(); g.strokeStyle = C.orange; g.stroke();
       txt(g, L('AI note: occupancy +6 pts vs plan', 'Nota IA: ocupación +6 pts vs plan'), 554, 274, 12, C.text, 600);
       txt(g, L('driven by group bookings', 'por reservas de grupos'), 554, 294, 12, C.muted, 500); } }
     fadeLoop(g, t);
@@ -87,14 +87,14 @@
     chrome(g, L('Board Pack — Q3 2026.pptx', 'Board Pack — T3 2026.pptx'), L('READY TO PRESENT', 'LISTO'));
     g.fillStyle = '#070C16'; g.fillRect(0, 41, 150, LH);
     const slide = Math.floor(t / 2.4) % 3, sp = prog(t % 2.4, 0, .5);
-    for (let i = 0; i < 4; i++) { rr(g, 18, 60 + i * 96, 114, 72, 6); g.fillStyle = i === slide ? '#1A2B45' : C.panel; g.fill();
+    for (let i = 0; i < 4; i++) { rr(g, 18, 60 + i * 96, 114, 72, 6); g.fillStyle = i === slide ? '#262626' : C.panel; g.fill();
       g.strokeStyle = i === slide ? C.orange : C.line; g.lineWidth = i === slide ? 2 : 1; g.stroke();
       g.fillStyle = 'rgba(255,255,255,.2)'; g.fillRect(28, 72 + i * 96, 60, 5); g.fillRect(28, 84 + i * 96, 90, 3); g.fillRect(28, 92 + i * 96, 76, 3); }
     const X = 172, Y = 62, SW = 610, SH = 400;
     g.save(); g.translate((1 - eo(sp)) * 40, 0); g.globalAlpha = eo(sp);
     rr(g, X, Y, SW, SH, 10); g.fillStyle = '#F7F5F0'; g.fill();
     g.fillStyle = C.orange; g.fillRect(X, Y, 8, SH);
-    const N = '#0B1F3A';
+    const N = '#000000';
     if (slide === 0) {
       txt(g, L('Q3 highlights', 'Aspectos clave T3'), X + 40, Y + 70, 30, N, 800, DISP);
       [L('Revenue ahead of plan (+4.3%)', 'Ingresos por encima del plan (+4,3%)'), L('EBITDA margin at 18.9%', 'Margen EBITDA del 18,9%'),
@@ -135,7 +135,7 @@
       if (cur !== 'EUR') { rr(g, 180, y + 18, 44, 22, 11); g.fillStyle = 'rgba(127,178,255,.15)'; g.fill(); txt(g, 'FX', 202, y + 34, 11, C.ice, 600, MONO, 'center'); }
       g.globalAlpha = 1;
       const lp = prog(t, 1 + i * .1, 2 + i * .1);
-      g.strokeStyle = 'rgba(255,181,71,.35)'; g.lineWidth = 1.5; g.beginPath();
+      g.strokeStyle = 'rgba(168,209,58,.35)'; g.lineWidth = 1.5; g.beginPath();
       const sx = 240, sy = y + 30, mx = 420;
       g.moveTo(sx, sy); g.bezierCurveTo(mx, sy, mx, gy, lerp(sx, gx - 110, lp), lerp(sy, gy, lp)); g.stroke();
       for (let k = 0; k < 3; k++) { const u = ((t * .5 + k / 3 + i * .13) % 1); if (lp < 1) break;
@@ -144,12 +144,12 @@
     });
     const gp = eb(prog(t, 2, 2.8));
     g.save(); g.translate(gx, gy); g.scale(gp, gp);
-    rr(g, -110, -86, 220, 172, 16); g.fillStyle = '#16263F'; g.fill(); g.strokeStyle = C.orange; g.lineWidth = 2; g.stroke();
+    rr(g, -110, -86, 220, 172, 16); g.fillStyle = '#222222'; g.fill(); g.strokeStyle = C.orange; g.lineWidth = 2; g.stroke();
     txt(g, L('GROUP', 'GRUPO'), 0, -50, 12, C.amber, 600, MONO, 'center');
     const tot = 5.97 - 0.38 * prog(t, 3.2, 4.4);
     txt(g, fmt(tot, 2) + 'M€', 0, -6, 34, C.text, 800, DISP, 'center');
     txt(g, L('Revenue, consolidated', 'Ingresos consolidados'), 0, 20, 12, C.muted, 500, UI, 'center');
-    if (t > 3.2) { const p = prog(t, 3.2, 4.4); rr(g, -86, 38, 172, 30, 15); g.fillStyle = 'rgba(54,194,180,.15)'; g.fill();
+    if (t > 3.2) { const p = prog(t, 3.2, 4.4); rr(g, -86, 38, 172, 30, 15); g.fillStyle = 'rgba(0,171,171,.15)'; g.fill();
       txt(g, (p < 1 ? L('Eliminating… ', 'Eliminando… ') : '✓ ') + L('interco −0.38M', 'interco −0,38M'), 0, 58, 12, C.teal, 600, MONO, 'center'); }
     g.restore();
     fadeLoop(g, t);
@@ -168,7 +168,7 @@
     const hi = Math.floor(prog(t, 3, 6.5) * rows.length);
     rows.forEach(([n, b, a], i) => {
       const y = 126 + i * 50, p = eo(prog(t, .3 + i * .1, 1.6 + i * .1));
-      if (t > 3 && i === hi && t < 6.5) { g.fillStyle = 'rgba(242,140,40,.08)'; g.fillRect(22, y - 28, 756, 46); }
+      if (t > 3 && i === hi && t < 6.5) { g.fillStyle = 'rgba(134,188,37,.08)'; g.fillRect(22, y - 28, 756, 46); }
       g.fillStyle = C.line; g.fillRect(30, y + 14, 740, 1);
       g.globalAlpha = clamp(p * 1.5);
       txt(g, n, cx[0], y, 14, C.text, 600);
@@ -178,11 +178,11 @@
       rr(g, cx[3], y - 11, bw, 10, 5); g.fillStyle = 'rgba(255,255,255,.08)'; g.fill();
       rr(g, cx[3], y - 11, bw * Math.min(used, 1) * p, 10, 5); g.fillStyle = used > .85 ? C.orange : C.teal; g.fill();
       const ytd = .75; const v = (used - ytd) * 100;
-      rr(g, cx[4] - 6, y - 17, 64, 22, 11); g.fillStyle = v > 5 ? 'rgba(255,107,91,.15)' : 'rgba(54,194,180,.15)'; g.fill();
+      rr(g, cx[4] - 6, y - 17, 64, 22, 11); g.fillStyle = v > 5 ? 'rgba(255,107,91,.15)' : 'rgba(0,171,171,.15)'; g.fill();
       txt(g, (v > 0 ? '+' : '') + fmt(v, 0) + '%', cx[4] + 26, y - 1, 12, v > 5 ? C.red : C.teal, 700, MONO, 'center');
       g.globalAlpha = 1;
     });
-    g.strokeStyle = 'rgba(255,181,71,.5)'; g.setLineDash([4, 4]); g.beginPath(); g.moveTo(cx[3] + 190 * .75, 100); g.lineTo(cx[3] + 190 * .75, 460); g.stroke(); g.setLineDash([]);
+    g.strokeStyle = 'rgba(168,209,58,.5)'; g.setLineDash([4, 4]); g.beginPath(); g.moveTo(cx[3] + 190 * .75, 100); g.lineTo(cx[3] + 190 * .75, 460); g.stroke(); g.setLineDash([]);
     txt(g, L('YTD 75%', 'ACUM. 75%'), cx[3] + 190 * .75, 474, 10, C.amber, 500, MONO, 'center');
     fadeLoop(g, t);
   }
@@ -193,7 +193,7 @@
     card(g, 20, 56, 760, 424);
     const sc = Math.floor(prog(t, 3.4, 7.4) * 3), names = [L('Base', 'Base'), L('Best', 'Optimista'), L('Worst', 'Pesimista')];
     names.forEach((n, i) => { rr(g, 40 + i * 110, 74, 100, 28, 14); g.fillStyle = i === Math.min(sc, 2) ? C.orange : 'rgba(255,255,255,.06)'; g.fill();
-      txt(g, n, 90 + i * 110, 93, 12, i === Math.min(sc, 2) ? '#05080F' : C.text2, 600, UI, 'center'); });
+      txt(g, n, 90 + i * 110, 93, 12, i === Math.min(sc, 2) ? '#000000' : C.text2, 600, UI, 'center'); });
     const base = [2.4, 2.1, 2.3, 1.9, 1.7, 2.0, 2.2, 1.8, 1.6, 1.9, 2.3, 2.5, 2.7];
     const DELTA = [[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
                    [0, .05, .1, .15, .2, .25, .3, .35, .4, .45, .5, .55, .6],
@@ -204,14 +204,14 @@
     for (let i = 0; i < 5; i++) txt(g, fmt(i * 70 / k, 1) + 'M', X0 - 26, Y0 - i * 70 + 4, 10, C.muted, 500, MONO, 'right');
     vals.forEach((vv, i) => {
       const p = eb(prog(t, .3 + i * .06, 1.2 + i * .06)), h = vv * k * p;
-      g.fillStyle = vv < MIN ? C.red : i < 2 ? C.teal : 'rgba(255,181,71,.8)';
+      g.fillStyle = vv < MIN ? C.red : i < 2 ? C.teal : 'rgba(168,209,58,.8)';
       rr(g, X0 + i * dx, Y0 - h, 30, h, 4); g.fill();
       txt(g, (lang() === 'es' ? 'S' : 'W') + (i + 1), X0 + i * dx + 15, Y0 + 18, 10, C.muted, 500, MONO, 'center');
     });
     const mp = prog(t, 1.6, 2.4);
     g.strokeStyle = C.red; g.setLineDash([6, 5]); g.lineWidth = 1.5; g.beginPath();
     g.moveTo(X0 - 20, Y0 - MIN * k); g.lineTo(X0 - 20 + 690 * mp, Y0 - MIN * k); g.stroke(); g.setLineDash([]);
-    if (mp >= 1) { rr(g, X0 - 20, Y0 - MIN * k - 24, 150, 20, 6); g.fillStyle = '#0A1220'; g.fill();
+    if (mp >= 1) { rr(g, X0 - 20, Y0 - MIN * k - 24, 150, 20, 6); g.fillStyle = '#111111'; g.fill();
       txt(g, L('MIN. CASH 1.5M', 'CAJA MÍN. 1,5M'), X0 - 12, Y0 - MIN * k - 10, 11, C.red, 600, MONO); }
     if (first >= 0 && t > 6) { rr(g, 440, 120, 320, 54, 10); g.fillStyle = 'rgba(255,107,91,.12)'; g.fill(); g.strokeStyle = C.red; g.stroke();
       txt(g, L(`⚠ Alert: W${first + 1} below minimum cash`, `⚠ Alerta: S${first + 1} por debajo de caja mínima`), 456, 142, 13, C.text, 700);
@@ -246,7 +246,7 @@
       g.strokeStyle = (i === 4 || i === 6) && t > 3 && t < 6 ? C.orange : c === C.orange ? C.orange : C.line2; g.lineWidth = 1.5; g.stroke();
       txt(g, n.toUpperCase(), 0, -8, 10.5, C.muted, 500, MONO, 'center'); txt(g, v, 0, 20, i === 0 ? 24 : 19, i === 0 ? C.text : c, 800, DISP, 'center');
       g.restore(); });
-    if (t > 3 && t < 6.2) { rr(g, 560, 70, 210, 50, 10); g.fillStyle = 'rgba(242,140,40,.12)'; g.fill(); g.strokeStyle = C.orange; g.stroke();
+    if (t > 3 && t < 6.2) { rr(g, 560, 70, 210, 50, 10); g.fillStyle = 'rgba(134,188,37,.12)'; g.fill(); g.strokeStyle = C.orange; g.stroke();
       txt(g, L('Scenario: +6 pts occupancy', 'Escenario: +6 pts ocupación'), 574, 92, 12, C.text, 700); txt(g, L('recalculating live…', 'recalculando en vivo…'), 574, 110, 11, C.amber, 500, MONO); }
     fadeLoop(g, t);
   }
@@ -266,7 +266,7 @@
         txt(g, fmt(shown, 1), 214 + i * 74, y, 13, settle ? (v < 0 ? C.red : j === 4 ? C.amber : C.text) : C.muted, 600, MONO, 'right'); });
     });
     const ep = eb(prog(t, 2.2, 3)); g.save(); g.translate(660, 190); g.scale(ep, ep);
-    rr(g, -110, -100, 220, 200, 14); g.fillStyle = '#16263F'; g.fill(); g.strokeStyle = C.orange; g.lineWidth = 2; g.stroke();
+    rr(g, -110, -100, 220, 200, 14); g.fillStyle = '#222222'; g.fill(); g.strokeStyle = C.orange; g.lineWidth = 2; g.stroke();
     txt(g, 'ENTERPRISE VALUE', 0, -64, 11, C.amber, 600, MONO, 'center');
     txt(g, fmt(42.3 * clamp(ep), 1) + 'M€', 0, -22, 34, C.text, 800, DISP, 'center');
     [['WACC', '9.5%'], ['g', '2.0%'], ['EV/EBITDA', '9.8x']].forEach(([k, v], i) => { txt(g, k, -86, 18 + i * 24, 12, C.muted, 500, MONO); txt(g, v, 86, 18 + i * 24, 12, C.text, 700, MONO, 'right'); });
@@ -304,13 +304,13 @@
       txt(g, a, 330, y + 4, 13, C.text, 600, MONO);
       const cp = prog(t, .8 + i * .35, 1.3 + i * .35);
       if (cp > 0) { const lab = L(en, es); g.font = `600 11.5px ${MONO}`; const w = g.measureText(lab).width + 20;
-        rr(g, 470, y - 12, w * cp, 24, 12); g.fillStyle = 'rgba(242,140,40,.16)'; g.fill();
+        rr(g, 470, y - 12, w * cp, 24, 12); g.fillStyle = 'rgba(134,188,37,.16)'; g.fill();
         if (cp >= 1) txt(g, lab, 480, y + 4, 11.5, C.amber, 600, MONO); }
       const bp = prog(t, 1.4 + i * .35, 1.7 + i * .35);
-      if (bp > 0) { g.fillStyle = C.teal; g.globalAlpha = p * bp; g.beginPath(); g.arc(704, y, 11, 0, 6.3); g.fill(); txt(g, '✓', 704, y + 5, 13, '#05080F', 800, UI, 'center'); done++; }
+      if (bp > 0) { g.fillStyle = C.teal; g.globalAlpha = p * bp; g.beginPath(); g.arc(704, y, 11, 0, 6.3); g.fill(); txt(g, '✓', 704, y + 5, 13, '#000000', 800, UI, 'center'); done++; }
       g.restore(); g.globalAlpha = 1;
     });
-    rr(g, 560, 440, 204, 28, 14); g.fillStyle = 'rgba(54,194,180,.14)'; g.fill();
+    rr(g, 560, 440, 204, 28, 14); g.fillStyle = 'rgba(0,171,171,.14)'; g.fill();
     txt(g, `${done}/6 ` + L('matched · 0 manual', 'cuadradas · 0 manual'), 662, 459, 11.5, C.teal, 600, MONO, 'center');
     fadeLoop(g, t);
   }
