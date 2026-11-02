@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>PRIZMA BI — Due diligence for private equity</title>
-<meta name="description" content="PRIZMA BI: financial and forensic due diligence for private equity, venture capital and family offices, with an AI layer that tests the full ledger.">
+<meta name="description" content="PRIZMA BI: senior financial and forensic due diligence support for funds and advisory firms, with an AI layer that tests the full ledger. Prizma Limited, Hong Kong.">
 <meta property="og:title" content="PRIZMA BI — Due diligence for private equity">
 <meta property="og:description" content="Senior investigators with an AI layer on top.">
 <meta name="theme-color" content="#FFFFFF">
@@ -56,7 +56,7 @@ body.menu-open .menu-bg{opacity:1;pointer-events:auto}
 .menu li a::before{content:"0" counter(m);font:500 12px var(--mono);color:var(--mute);letter-spacing:.1em}
 .menu li a:hover{color:var(--orange)}
 body.menu-open .menu li a{transform:none}
-body.menu-open .menu li:nth-child(2) a{transition-delay:.05s}body.menu-open .menu li:nth-child(3) a{transition-delay:.1s}body.menu-open .menu li:nth-child(4) a{transition-delay:.15s}body.menu-open .menu li:nth-child(5) a{transition-delay:.2s}body.menu-open .menu li:nth-child(6) a{transition-delay:.25s}body.menu-open .menu li:nth-child(7) a{transition-delay:.3s}
+body.menu-open .menu li:nth-child(2) a{transition-delay:.05s}body.menu-open .menu li:nth-child(3) a{transition-delay:.1s}body.menu-open .menu li:nth-child(4) a{transition-delay:.15s}body.menu-open .menu li:nth-child(5) a{transition-delay:.2s}body.menu-open .menu li:nth-child(6) a{transition-delay:.25s}body.menu-open .menu li:nth-child(7) a{transition-delay:.3s}body.menu-open .menu li:nth-child(8) a{transition-delay:.35s}
 .menu-foot{margin-top:auto;padding-top:36px;display:grid;gap:18px;border-top:1px solid var(--hair)}
 .menu-foot a{text-decoration:none;color:var(--ink-2)}
 .lang{display:flex;gap:4px}
@@ -296,6 +296,20 @@ body.lock{overflow:hidden}
 }
 @media (max-width:520px){.cases,.steps{grid-template-columns:1fr}.sim-out{grid-template-columns:1fr}}
 @media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}.reveal{transform:none}.menu li a{transform:none}}
+
+/* team */
+.team{display:grid;grid-template-columns:1fr 1fr;gap:40px}
+.pp{display:grid;grid-template-columns:132px minmax(0,1fr);gap:24px;border-top:1.5px solid var(--ink);padding-top:20px}
+.pp img{width:132px;height:132px;object-fit:cover;object-position:center 20%;filter:grayscale(1);background:var(--mist)}
+.pp .role{font:500 11.5px var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--orange-d)}
+.pp h3{font-size:26px;margin:6px 0 8px}
+.pp p{font-size:14.5px;color:var(--ink-2);font-weight:300}
+.pp .leads{margin-top:10px;color:var(--ink)}
+.pp .leads span:first-child{font-weight:600}
+.pp .chips{display:flex;flex-wrap:wrap;gap:6px;margin-top:12px}
+.pp .chips span{font:400 11px var(--mono);border:1px solid var(--hair);padding:3px 8px;color:var(--ink-2)}
+@media (max-width:1050px){.team{grid-template-columns:1fr}}
+@media (max-width:520px){.pp{grid-template-columns:1fr}.pp img{width:96px;height:96px}}
 </style>
 </head>
 <body>
@@ -315,6 +329,7 @@ body.lock{overflow:hidden}
     <li><a href="#reports" data-i18n="m4">Sample report</a></li>
     <li><a href="#services" data-i18n="m5">Services</a></li>
     <li><a href="#approach" data-i18n="m6">Approach</a></li>
+    <li><a href="#team" data-i18n="m8">Team</a></li>
     <li><a href="#contact" data-i18n="m7">Contact</a></li>
   </ol>
   <div class="menu-foot">
@@ -332,7 +347,7 @@ body.lock{overflow:hidden}
       <p class="kicker" data-i18n="h_k">Financial &amp; forensic due diligence</p>
       <h1 data-i18n-html="h_t">Know exactly what you're buying<span class="dot">.</span></h1>
       <div class="lead">
-        <p data-i18n="h_p">A boutique of senior investigators for private equity, venture capital and family offices, with an AI layer that reads the whole ledger, not a sample.</p>
+        <p data-i18n="h_p">Senior due diligence support for private equity, venture capital, family offices and the advisory firms that serve them. Two former finance leaders, with an AI layer that reads the whole ledger, not a sample.</p>
         <div class="ctas"><a class="btn solid" href="#contact"><span data-i18n="h_c1">Discuss a deal</span><span class="arr">→</span></a><a class="btn line" href="#lab" data-i18n="h_c2">Try the simulator</a></div>
       </div>
       <div class="film" id="film" aria-label="The AI layer at work">
@@ -352,7 +367,7 @@ body.lock{overflow:hidden}
     <div class="wrap">
       <div><b data-i18n="p1b">100% of entries</b><span data-i18n="p1s">Every journal entry tested, not a sample of sixty.</span></div>
       <div><b data-i18n="p2b">Traced to source</b><span data-i18n="p2s">Every adjustment linked to the ledger line or document behind it.</span></div>
-      <div><b data-i18n="p3b">A partner on every deal</b><span data-i18n="p3s">Including a Certified Fraud Examiner reviewing every flag.</span></div>
+      <div><b data-i18n="p3b">On your team or alongside it</b><span data-i18n="p3s">We work for funds directly or as senior support inside an advisory firm's engagement.</span></div>
     </div>
   </section>
 
@@ -434,6 +449,37 @@ body.lock{overflow:hidden}
     </div>
   </section>
 
+  <section id="team">
+    <div class="wrap">
+      <div class="head">
+        <div><p class="kicker" data-i18n="tm_k">Who does the work</p><h2 data-i18n-html="tm_t">Two finance leaders, one standard<span class="dot">.</span></h2></div>
+        <p data-i18n="tm_p">No juniors learning on your deal. The people you speak to are the people who read the ledger.</p>
+      </div>
+      <div class="team">
+        <article class="pp">
+          <img src="javier.png" alt="Javier Munoz" loading="lazy">
+          <div>
+            <p class="role" data-i18n="tj_r">Co-founder · Transactions, forensic &amp; cash</p>
+            <h3>Javier Munoz, CFE</h3>
+            <p data-i18n="tj_b">CFO with 13 years in finance leadership, the last eight in Asia across Japan, Hong Kong and Korea. He has led investor due diligences from the company side, completed four acquisitions in Europe and the Americas and turned two businesses around. Certified Fraud Examiner.</p>
+            <p class="leads"><span data-i18n="t_l">Leads:</span> <span data-i18n="tj_l">quality of earnings, valuation, forensic review, net debt and cash</span></p>
+            <p class="chips"><span>CFE</span><span>US GAAP · IFRS · JGAAP · HK GAAP</span><span>ES · EN · DE · ZH</span></p>
+          </div>
+        </article>
+        <article class="pp">
+          <img src="rocio.png" alt="Rocío Marín" loading="lazy">
+          <div>
+            <p class="role" data-i18n="tr_r">Co-founder · Accounting, close &amp; tax</p>
+            <h3>Rocío Marín</h3>
+            <p data-i18n="tr_b">Economist with master's degrees in accounting and financial management and in tax advisory. She has run the accounting and finance department of a group of companies, from the monthly close to reporting for banks and auditors, and has advised companies on tax since 2019.</p>
+            <p class="leads"><span data-i18n="t_l2">Leads:</span> <span data-i18n="tr_l">quality of the books, close and cut-off, tax exposures</span></p>
+            <p class="chips"><span data-i18n="tr_c1">Economics · Univ. Zaragoza</span><span data-i18n="tr_c2">MSc Accounting &amp; Finance</span><span data-i18n="tr_c3">MSc Tax Advisory</span></p>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
   <section id="process">
     <div class="wrap">
       <div class="head">
@@ -453,7 +499,7 @@ body.lock{overflow:hidden}
       <p class="kicker" data-i18n="ct_k">Contact</p>
       <h2 data-i18n-html="ct_t">Have a deal on the table<span class="dot">?</span></h2>
       <div class="row">
-        <div><p data-i18n="ct_p">Tell us about the target. In 30 minutes we'll scope the diligence, timing and fee.</p><a class="mail" href="mailto:hola@prizma.bi">hola@prizma.bi</a></div>
+        <div><p data-i18n="ct_p">Fund or advisory firm, tell us about the target or the workstream you need covered. In 30 minutes we'll agree scope, timing and fee.</p><a class="mail" href="mailto:hola@prizma.bi">hola@prizma.bi</a></div>
         <!-- TODO: replace with the real Calendly / Google Calendar link -->
         <a class="btn solid" href="https://calendly.com/REPLACE-ME/30min" target="_blank" rel="noopener"><span data-i18n="ct_c">Book a 30-min call</span><span class="arr">→</span></a>
       </div>
@@ -471,7 +517,7 @@ body.lock{overflow:hidden}
 
 <footer>
   <div class="wrap">
-    <span>© <span id="yr"></span> PRIZMA BI</span>
+    <span>© <span id="yr"></span> Prizma Limited · Hong Kong · BR 77094800</span>
     <span><a href="https://www.linkedin.com/company/prizmabi/" target="_blank" rel="noopener">LINKEDIN</a> &nbsp;·&nbsp; <a href="mailto:hola@prizma.bi">HOLA@PRIZMA.BI</a></span>
   </div>
 </footer>
@@ -480,12 +526,12 @@ body.lock{overflow:hidden}
 const T = { es: {
   m_k:"Menú", m1:"La capa de IA", m2:"Simulador", m3:"Cobertura completa", m4:"Informe de ejemplo", m5:"Servicios", m6:"Enfoque", m7:"Contacto",
   h_k:"Due diligence financiera y forense", h_t:"Compra sabiendo exactamente qué compras<span class=\"dot\">.</span>",
-  h_p:"Una boutique de investigadores senior para private equity, venture capital y family offices, con una capa de IA que lee todo el libro mayor, no una muestra.",
+  h_p:"Apoyo senior en due diligence para private equity, venture capital, family offices y las firmas que los asesoran. Dos ex directivos financieros, con una capa de IA que lee todo el libro mayor, no una muestra.",
   h_c1:"Hablar de una operación", h_c2:"Probar el simulador",
   fp_n:"Película ilustrativa · empresa ficticia · pulsa un capítulo para saltar",
   p1b:"100% de los asientos", p1s:"Cada asiento contable analizado, no una muestra de sesenta.",
   p2b:"Trazado al origen", p2s:"Cada ajuste enlazado con la línea del mayor o el documento que lo respalda.",
-  p3b:"Un socio en cada operación", p3s:"Incluido un Certified Fraud Examiner que revisa cada alerta.",
+  p3b:"Dentro de tu equipo o a su lado", p3s:"Trabajamos para fondos directamente o como apoyo senior dentro del encargo de una firma asesora.",
   s_k:"Simulador de operación", s_t:"¿Cuánto vale de verdad la empresa<span class=\"dot\">?</span>",
   s_p:"Mueve el EBITDA reportado y el múltiplo, y activa o desactiva los hallazgos. Es la aritmética que llevamos a tu comité de inversión.",
   s_l1:"EBITDA reportado", s_l2:"Múltiplo de entrada", s_l3:"Hallazgos de la due diligence", s_o1:"Valor pedido", s_o2:"Valor justo", s_o3:"Diferencia",
@@ -503,7 +549,13 @@ const T = { es: {
   pr_k:"Cómo trabajamos", pr_t:"Del NDA al comité de inversión<span class=\"dot\">.</span>",
   st1:"Alcance", st1p:"NDA, contexto de la operación y las preguntas que importan a tu tesis.", st2:"Data room", st2p:"Cargamos mayores, datos bancarios y documentos.", st2a:"IA: indexar, mapear, analizar",
   st3:"Análisis", st3p:"Revisión senior de cada alerta; cada ajuste cuantificado y documentado.", st4:"Informe al comité", st4p:"Hallazgos, impacto en precio y recomendaciones para el contrato, y apoyo hasta la firma.",
-  ct_k:"Contacto", ct_t:"¿Tienes una operación encima de la mesa<span class=\"dot\">?</span>", ct_p:"Cuéntanos sobre la empresa objetivo. En 30 minutos definimos alcance, plazos y honorarios.", ct_c:"Agendar llamada de 30 min"
+  m8:"Equipo", tm_k:"Quién hace el trabajo", tm_t:"Dos directivos financieros, un mismo estándar<span class=\"dot\">.</span>",
+  tm_p:"Nada de juniors aprendiendo con tu operación. Las personas con las que hablas son las que leen el libro mayor.",
+  tj_r:"Cofundador · Transacciones, forense y caja", tj_b:"CFO con 13 años dirigiendo finanzas, los últimos ocho en Asia (Japón, Hong Kong y Corea). Ha liderado due diligences de inversores desde el lado de la empresa, cerrado cuatro adquisiciones en Europa y América y reestructurado dos negocios. Certified Fraud Examiner.",
+  t_l:"Lidera:", t_l2:"Lidera:", tj_l:"calidad del resultado, valoración, revisión forense, deuda neta y caja",
+  tr_r:"Cofundadora · Contabilidad, cierre y fiscalidad", tr_b:"Economista con másteres en dirección contable y financiera y en asesoría fiscal. Ha dirigido el departamento de contabilidad y finanzas de un grupo de empresas, del cierre mensual al reporting para bancos y auditores, y asesora fiscalmente a empresas desde 2019.",
+  tr_l:"calidad de la contabilidad, cierre y cortes, contingencias fiscales", tr_c1:"Lic. Economía · Univ. Zaragoza", tr_c2:"Máster Dir. Contable y Financiera", tr_c3:"Máster Asesoría Fiscal",
+  ct_k:"Contacto", ct_t:"¿Tienes una operación encima de la mesa<span class=\"dot\">?</span>", ct_p:"Seas fondo o firma asesora, cuéntanos la empresa objetivo o el bloque de trabajo que necesitas cubrir. En 30 minutos acordamos alcance, plazos y honorarios.", ct_c:"Agendar llamada de 30 min"
 }, en: {} };
 document.querySelectorAll('[data-i18n]').forEach(el => T.en[el.dataset.i18n] = el.textContent);
 document.querySelectorAll('[data-i18n-html]').forEach(el => T.en[el.dataset.i18nHtml] = el.innerHTML);
@@ -570,7 +622,7 @@ const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
 let io = null;
 if ('IntersectionObserver' in window && !reduce) io = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { e.target.classList.add('shown'); io.unobserve(e.target); } }), {threshold:.1});
 window.PrizmaReveal = els => els.forEach(el => { el.classList.add('reveal'); io ? io.observe(el) : el.classList.add('shown'); });
-PrizmaReveal(document.querySelectorAll('.head,.step,.duo > div,.r-page'));
+PrizmaReveal(document.querySelectorAll('.head,.step,.duo > div,.r-page,.pp'));
 </script>
 <script src="previews.js?v=4"></script>
 <script src="cases.js?v=4"></script>
