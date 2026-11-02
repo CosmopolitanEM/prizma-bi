@@ -3,8 +3,8 @@
 // logical space. Data shown is illustrative.
 (() => {
   const LW = 800, LH = 500, LOOP = 8;
-  const C = { bg: '#111111', panel: '#1A1A1A', panel2: '#222222', line: 'rgba(255,255,255,.08)', line2: 'rgba(255,255,255,.16)',
-    text: '#F2F2F2', text2: '#BBBBBB', muted: '#8A8A8A', orange: '#86BC25', amber: '#A8D13A', teal: '#00ABAB', red: '#FF6B5B', ice: '#7FB2FF' };
+  const C = { bg: '#FFFFFF', panel: '#F4F5F6', panel2: '#ECEEF0', line: 'rgba(20,20,20,.08)', line2: 'rgba(20,20,20,.16)',
+    text: '#1F1F1F', text2: '#4A4A4A', muted: '#8A8A8A', orange: '#F0571A', amber: '#C2410C', teal: '#2D2D2D', red: '#D4351C', ice: '#9AA0A6' };
   const MONO = '"Geist Mono", ui-monospace, Menlo, Consolas, monospace', DISP = 'Geist, "Helvetica Neue", Arial, sans-serif', UI = 'Geist, "Helvetica Neue", Arial, sans-serif';
   const clamp = (v, a = 0, b = 1) => Math.min(b, Math.max(a, v));
   const prog = (t, a, b) => clamp((t - a) / (b - a));
@@ -25,16 +25,16 @@
     ['#FF5F57', '#FEBC2E', '#28C840'].forEach((c, i) => { g.fillStyle = c; g.beginPath(); g.arc(22 + i * 18, 20, 5.5, 0, 6.3); g.fill(); });
     txt(g, title, 86, 25, 13, C.text2, 500, UI);
     if (tag) { g.font = `500 11px ${MONO}`; const w = g.measureText(tag).width + 18;
-      rr(g, LW - w - 16, 11, w, 19, 10); g.fillStyle = 'rgba(134,188,37,.15)'; g.fill();
+      rr(g, LW - w - 16, 11, w, 19, 10); g.fillStyle = 'rgba(240,87,26,.15)'; g.fill();
       txt(g, tag, LW - w - 7, 25, 11, C.amber, 500, MONO); }
   }
   function card(g, x, y, w, h) { rr(g, x, y, w, h, 12); g.fillStyle = C.panel; g.fill(); g.strokeStyle = C.line; g.lineWidth = 1; g.stroke(); }
   function fadeLoop(g, t) { const f = prog(t, LOOP - .45, LOOP); if (f > 0) { g.globalAlpha = f; g.fillStyle = C.bg; g.fillRect(0, 0, LW, LH); g.globalAlpha = 1; } }
   function cursor(g, x, y, click) {
     g.save(); g.translate(x, y);
-    if (click) { g.strokeStyle = 'rgba(134,188,37,.6)'; g.lineWidth = 2; g.beginPath(); g.arc(0, 0, 10 + click * 12, 0, 6.3); g.globalAlpha = 1 - click; g.stroke(); g.globalAlpha = 1; }
+    if (click) { g.strokeStyle = 'rgba(240,87,26,.6)'; g.lineWidth = 2; g.beginPath(); g.arc(0, 0, 10 + click * 12, 0, 6.3); g.globalAlpha = 1 - click; g.stroke(); g.globalAlpha = 1; }
     g.beginPath(); g.moveTo(0, 0); g.lineTo(0, 17); g.lineTo(4.5, 13); g.lineTo(8, 20); g.lineTo(10.5, 19); g.lineTo(7, 12); g.lineTo(12.5, 12); g.closePath();
-    g.fillStyle = '#fff'; g.fill(); g.strokeStyle = '#000000'; g.lineWidth = 1.2; g.stroke(); g.restore();
+    g.fillStyle = '#fff'; g.fill(); g.strokeStyle = '#1F1F1F'; g.lineWidth = 1.2; g.stroke(); g.restore();
   }
 
   // 1 ── Management reporting: KPI tiles + actual vs budget bars + variances
@@ -55,7 +55,7 @@
     const mo = L('JFMAMJJAS', 'EFMAMJJAS');
     for (let i = 0; i < 9; i++) {
       const p = eb(prog(t, .8 + i * .08, 1.8 + i * .08)), x = 50 + i * 48, base = 440;
-      g.fillStyle = 'rgba(255,255,255,.14)'; g.fillRect(x, base - bud[i] * .5 * p, 16, bud[i] * .5 * p);
+      g.fillStyle = 'rgba(20,20,20,.14)'; g.fillRect(x, base - bud[i] * .5 * p, 16, bud[i] * .5 * p);
       g.fillStyle = i === 8 ? C.orange : C.amber; g.globalAlpha = i === 8 ? 1 : .75;
       g.fillRect(x + 18, base - act[i] * .5 * p, 16, act[i] * .5 * p); g.globalAlpha = 1;
       txt(g, mo[i], x + 17, 462, 11, C.muted, 500, MONO, 'center');
@@ -70,13 +70,13 @@
       g.fillStyle = C.line; g.fillRect(524, y + 16, 238, 1);
       txt(g, n, 524 + (1 - p) * 20, y, 13, C.text, 500);
       txt(g, v, 762, y, 13, up ? C.teal : C.red, 700, MONO, 'right');
-      g.fillStyle = up ? 'rgba(0,171,171,.25)' : 'rgba(255,107,91,.25)';
+      g.fillStyle = up ? 'rgba(45,45,45,.25)' : 'rgba(212,53,28,.25)';
       g.fillRect(524, y + 6, 238 * (.2 + (i % 3) * .2) * p, 3);
       g.globalAlpha = 1;
     });
     const c = prog(t, 4.2, 5.2); if (c > 0 && c < 1) cursor(g, 600 + c * 80, 300 - c * 60);
     if (t > 5.2) { const k = prog(t, 5.2, 5.8); cursor(g, 680, 240, k); if (t > 5.4) {
-      rr(g, 540, 250, 230, 58, 10); g.fillStyle = '#262626'; g.fill(); g.strokeStyle = C.orange; g.stroke();
+      rr(g, 540, 250, 230, 58, 10); g.fillStyle = '#1A2B45'; g.fill(); g.strokeStyle = C.orange; g.stroke();
       txt(g, L('AI note: occupancy +6 pts vs plan', 'Nota IA: ocupación +6 pts vs plan'), 554, 274, 12, C.text, 600);
       txt(g, L('driven by group bookings', 'por reservas de grupos'), 554, 294, 12, C.muted, 500); } }
     fadeLoop(g, t);
@@ -87,14 +87,14 @@
     chrome(g, L('Board Pack — Q3 2026.pptx', 'Board Pack — T3 2026.pptx'), L('READY TO PRESENT', 'LISTO'));
     g.fillStyle = '#070C16'; g.fillRect(0, 41, 150, LH);
     const slide = Math.floor(t / 2.4) % 3, sp = prog(t % 2.4, 0, .5);
-    for (let i = 0; i < 4; i++) { rr(g, 18, 60 + i * 96, 114, 72, 6); g.fillStyle = i === slide ? '#262626' : C.panel; g.fill();
+    for (let i = 0; i < 4; i++) { rr(g, 18, 60 + i * 96, 114, 72, 6); g.fillStyle = i === slide ? '#1A2B45' : C.panel; g.fill();
       g.strokeStyle = i === slide ? C.orange : C.line; g.lineWidth = i === slide ? 2 : 1; g.stroke();
-      g.fillStyle = 'rgba(255,255,255,.2)'; g.fillRect(28, 72 + i * 96, 60, 5); g.fillRect(28, 84 + i * 96, 90, 3); g.fillRect(28, 92 + i * 96, 76, 3); }
+      g.fillStyle = 'rgba(20,20,20,.2)'; g.fillRect(28, 72 + i * 96, 60, 5); g.fillRect(28, 84 + i * 96, 90, 3); g.fillRect(28, 92 + i * 96, 76, 3); }
     const X = 172, Y = 62, SW = 610, SH = 400;
     g.save(); g.translate((1 - eo(sp)) * 40, 0); g.globalAlpha = eo(sp);
     rr(g, X, Y, SW, SH, 10); g.fillStyle = '#F7F5F0'; g.fill();
     g.fillStyle = C.orange; g.fillRect(X, Y, 8, SH);
-    const N = '#000000';
+    const N = '#0B1F3A';
     if (slide === 0) {
       txt(g, L('Q3 highlights', 'Aspectos clave T3'), X + 40, Y + 70, 30, N, 800, DISP);
       [L('Revenue ahead of plan (+4.3%)', 'Ingresos por encima del plan (+4,3%)'), L('EBITDA margin at 18.9%', 'Margen EBITDA del 18,9%'),
@@ -135,7 +135,7 @@
       if (cur !== 'EUR') { rr(g, 180, y + 18, 44, 22, 11); g.fillStyle = 'rgba(127,178,255,.15)'; g.fill(); txt(g, 'FX', 202, y + 34, 11, C.ice, 600, MONO, 'center'); }
       g.globalAlpha = 1;
       const lp = prog(t, 1 + i * .1, 2 + i * .1);
-      g.strokeStyle = 'rgba(168,209,58,.35)'; g.lineWidth = 1.5; g.beginPath();
+      g.strokeStyle = 'rgba(240,87,26,.35)'; g.lineWidth = 1.5; g.beginPath();
       const sx = 240, sy = y + 30, mx = 420;
       g.moveTo(sx, sy); g.bezierCurveTo(mx, sy, mx, gy, lerp(sx, gx - 110, lp), lerp(sy, gy, lp)); g.stroke();
       for (let k = 0; k < 3; k++) { const u = ((t * .5 + k / 3 + i * .13) % 1); if (lp < 1) break;
@@ -144,12 +144,12 @@
     });
     const gp = eb(prog(t, 2, 2.8));
     g.save(); g.translate(gx, gy); g.scale(gp, gp);
-    rr(g, -110, -86, 220, 172, 16); g.fillStyle = '#222222'; g.fill(); g.strokeStyle = C.orange; g.lineWidth = 2; g.stroke();
+    rr(g, -110, -86, 220, 172, 16); g.fillStyle = '#16263F'; g.fill(); g.strokeStyle = C.orange; g.lineWidth = 2; g.stroke();
     txt(g, L('GROUP', 'GRUPO'), 0, -50, 12, C.amber, 600, MONO, 'center');
     const tot = 5.97 - 0.38 * prog(t, 3.2, 4.4);
     txt(g, fmt(tot, 2) + 'M€', 0, -6, 34, C.text, 800, DISP, 'center');
     txt(g, L('Revenue, consolidated', 'Ingresos consolidados'), 0, 20, 12, C.muted, 500, UI, 'center');
-    if (t > 3.2) { const p = prog(t, 3.2, 4.4); rr(g, -86, 38, 172, 30, 15); g.fillStyle = 'rgba(0,171,171,.15)'; g.fill();
+    if (t > 3.2) { const p = prog(t, 3.2, 4.4); rr(g, -86, 38, 172, 30, 15); g.fillStyle = 'rgba(45,45,45,.15)'; g.fill();
       txt(g, (p < 1 ? L('Eliminating… ', 'Eliminando… ') : '✓ ') + L('interco −0.38M', 'interco −0,38M'), 0, 58, 12, C.teal, 600, MONO, 'center'); }
     g.restore();
     fadeLoop(g, t);
@@ -168,21 +168,21 @@
     const hi = Math.floor(prog(t, 3, 6.5) * rows.length);
     rows.forEach(([n, b, a], i) => {
       const y = 126 + i * 50, p = eo(prog(t, .3 + i * .1, 1.6 + i * .1));
-      if (t > 3 && i === hi && t < 6.5) { g.fillStyle = 'rgba(134,188,37,.08)'; g.fillRect(22, y - 28, 756, 46); }
+      if (t > 3 && i === hi && t < 6.5) { g.fillStyle = 'rgba(240,87,26,.08)'; g.fillRect(22, y - 28, 756, 46); }
       g.fillStyle = C.line; g.fillRect(30, y + 14, 740, 1);
       g.globalAlpha = clamp(p * 1.5);
       txt(g, n, cx[0], y, 14, C.text, 600);
       txt(g, fmt(b) + 'k', cx[1], y, 13, C.text2, 500, MONO);
       txt(g, fmt(a * p) + 'k', cx[2], y, 13, C.text, 600, MONO);
       const used = a / b, bw = 190;
-      rr(g, cx[3], y - 11, bw, 10, 5); g.fillStyle = 'rgba(255,255,255,.08)'; g.fill();
+      rr(g, cx[3], y - 11, bw, 10, 5); g.fillStyle = 'rgba(20,20,20,.08)'; g.fill();
       rr(g, cx[3], y - 11, bw * Math.min(used, 1) * p, 10, 5); g.fillStyle = used > .85 ? C.orange : C.teal; g.fill();
       const ytd = .75; const v = (used - ytd) * 100;
-      rr(g, cx[4] - 6, y - 17, 64, 22, 11); g.fillStyle = v > 5 ? 'rgba(255,107,91,.15)' : 'rgba(0,171,171,.15)'; g.fill();
+      rr(g, cx[4] - 6, y - 17, 64, 22, 11); g.fillStyle = v > 5 ? 'rgba(212,53,28,.15)' : 'rgba(45,45,45,.15)'; g.fill();
       txt(g, (v > 0 ? '+' : '') + fmt(v, 0) + '%', cx[4] + 26, y - 1, 12, v > 5 ? C.red : C.teal, 700, MONO, 'center');
       g.globalAlpha = 1;
     });
-    g.strokeStyle = 'rgba(168,209,58,.5)'; g.setLineDash([4, 4]); g.beginPath(); g.moveTo(cx[3] + 190 * .75, 100); g.lineTo(cx[3] + 190 * .75, 460); g.stroke(); g.setLineDash([]);
+    g.strokeStyle = 'rgba(240,87,26,.5)'; g.setLineDash([4, 4]); g.beginPath(); g.moveTo(cx[3] + 190 * .75, 100); g.lineTo(cx[3] + 190 * .75, 460); g.stroke(); g.setLineDash([]);
     txt(g, L('YTD 75%', 'ACUM. 75%'), cx[3] + 190 * .75, 474, 10, C.amber, 500, MONO, 'center');
     fadeLoop(g, t);
   }
@@ -192,8 +192,8 @@
     chrome(g, L('13-week cash flow forecast', 'Previsión de caja a 13 semanas'), L('UPDATED TODAY', 'ACTUALIZADO HOY'));
     card(g, 20, 56, 760, 424);
     const sc = Math.floor(prog(t, 3.4, 7.4) * 3), names = [L('Base', 'Base'), L('Best', 'Optimista'), L('Worst', 'Pesimista')];
-    names.forEach((n, i) => { rr(g, 40 + i * 110, 74, 100, 28, 14); g.fillStyle = i === Math.min(sc, 2) ? C.orange : 'rgba(255,255,255,.06)'; g.fill();
-      txt(g, n, 90 + i * 110, 93, 12, i === Math.min(sc, 2) ? '#000000' : C.text2, 600, UI, 'center'); });
+    names.forEach((n, i) => { rr(g, 40 + i * 110, 74, 100, 28, 14); g.fillStyle = i === Math.min(sc, 2) ? C.orange : 'rgba(20,20,20,.06)'; g.fill();
+      txt(g, n, 90 + i * 110, 93, 12, i === Math.min(sc, 2) ? '#FFFFFF' : C.text2, 600, UI, 'center'); });
     const base = [2.4, 2.1, 2.3, 1.9, 1.7, 2.0, 2.2, 1.8, 1.6, 1.9, 2.3, 2.5, 2.7];
     const DELTA = [[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
                    [0, .05, .1, .15, .2, .25, .3, .35, .4, .45, .5, .55, .6],
@@ -204,16 +204,16 @@
     for (let i = 0; i < 5; i++) txt(g, fmt(i * 70 / k, 1) + 'M', X0 - 26, Y0 - i * 70 + 4, 10, C.muted, 500, MONO, 'right');
     vals.forEach((vv, i) => {
       const p = eb(prog(t, .3 + i * .06, 1.2 + i * .06)), h = vv * k * p;
-      g.fillStyle = vv < MIN ? C.red : i < 2 ? C.teal : 'rgba(168,209,58,.8)';
+      g.fillStyle = vv < MIN ? C.red : i < 2 ? C.teal : 'rgba(240,87,26,.8)';
       rr(g, X0 + i * dx, Y0 - h, 30, h, 4); g.fill();
       txt(g, (lang() === 'es' ? 'S' : 'W') + (i + 1), X0 + i * dx + 15, Y0 + 18, 10, C.muted, 500, MONO, 'center');
     });
     const mp = prog(t, 1.6, 2.4);
     g.strokeStyle = C.red; g.setLineDash([6, 5]); g.lineWidth = 1.5; g.beginPath();
     g.moveTo(X0 - 20, Y0 - MIN * k); g.lineTo(X0 - 20 + 690 * mp, Y0 - MIN * k); g.stroke(); g.setLineDash([]);
-    if (mp >= 1) { rr(g, X0 - 20, Y0 - MIN * k - 24, 150, 20, 6); g.fillStyle = '#111111'; g.fill();
+    if (mp >= 1) { rr(g, X0 - 20, Y0 - MIN * k - 24, 150, 20, 6); g.fillStyle = '#FFFFFF'; g.fill();
       txt(g, L('MIN. CASH 1.5M', 'CAJA MÍN. 1,5M'), X0 - 12, Y0 - MIN * k - 10, 11, C.red, 600, MONO); }
-    if (first >= 0 && t > 6) { rr(g, 440, 120, 320, 54, 10); g.fillStyle = 'rgba(255,107,91,.12)'; g.fill(); g.strokeStyle = C.red; g.stroke();
+    if (first >= 0 && t > 6) { rr(g, 440, 120, 320, 54, 10); g.fillStyle = 'rgba(212,53,28,.12)'; g.fill(); g.strokeStyle = C.red; g.stroke();
       txt(g, L(`⚠ Alert: W${first + 1} below minimum cash`, `⚠ Alerta: S${first + 1} por debajo de caja mínima`), 456, 142, 13, C.text, 700);
       txt(g, L('Suggested: delay capex, draw facility', 'Sugerido: aplazar capex, disponer línea'), 456, 162, 12, C.text2, 500); }
     fadeLoop(g, t);
@@ -235,7 +235,7 @@
       [695, 390, L('Discounts', 'Descuentos'), '-' + fmt(24 - tw * 7, 0) + ' €', C.text2, .9]];
     const edges = [[0, 1], [0, 2], [1, 3], [1, 4], [2, 5], [2, 6]];
     edges.forEach(([a, b]) => { const p = prog(t, .4 + nodes[b][5], 1 + nodes[b][5]); const A = nodes[a], B = nodes[b];
-      g.strokeStyle = 'rgba(255,255,255,.18)'; g.lineWidth = 1.5; g.beginPath(); g.moveTo(A[0], A[1] + 32);
+      g.strokeStyle = 'rgba(20,20,20,.18)'; g.lineWidth = 1.5; g.beginPath(); g.moveTo(A[0], A[1] + 32);
       g.lineTo(A[0], lerp(A[1] + 32, (A[1] + B[1]) / 2, p)); if (p > .5) { g.lineTo(lerp(A[0], B[0], (p - .5) * 2), (A[1] + B[1]) / 2); }
       if (p >= 1) g.lineTo(B[0], B[1] - 32); g.stroke();
       if (t > 3 && t < 6) { const u = (t * .8) % 1; g.fillStyle = C.orange; g.beginPath();
@@ -246,7 +246,7 @@
       g.strokeStyle = (i === 4 || i === 6) && t > 3 && t < 6 ? C.orange : c === C.orange ? C.orange : C.line2; g.lineWidth = 1.5; g.stroke();
       txt(g, n.toUpperCase(), 0, -8, 10.5, C.muted, 500, MONO, 'center'); txt(g, v, 0, 20, i === 0 ? 24 : 19, i === 0 ? C.text : c, 800, DISP, 'center');
       g.restore(); });
-    if (t > 3 && t < 6.2) { rr(g, 560, 70, 210, 50, 10); g.fillStyle = 'rgba(134,188,37,.12)'; g.fill(); g.strokeStyle = C.orange; g.stroke();
+    if (t > 3 && t < 6.2) { rr(g, 560, 70, 210, 50, 10); g.fillStyle = 'rgba(240,87,26,.12)'; g.fill(); g.strokeStyle = C.orange; g.stroke();
       txt(g, L('Scenario: +6 pts occupancy', 'Escenario: +6 pts ocupación'), 574, 92, 12, C.text, 700); txt(g, L('recalculating live…', 'recalculando en vivo…'), 574, 110, 11, C.amber, 500, MONO); }
     fadeLoop(g, t);
   }
@@ -266,7 +266,7 @@
         txt(g, fmt(shown, 1), 214 + i * 74, y, 13, settle ? (v < 0 ? C.red : j === 4 ? C.amber : C.text) : C.muted, 600, MONO, 'right'); });
     });
     const ep = eb(prog(t, 2.2, 3)); g.save(); g.translate(660, 190); g.scale(ep, ep);
-    rr(g, -110, -100, 220, 200, 14); g.fillStyle = '#222222'; g.fill(); g.strokeStyle = C.orange; g.lineWidth = 2; g.stroke();
+    rr(g, -110, -100, 220, 200, 14); g.fillStyle = '#16263F'; g.fill(); g.strokeStyle = C.orange; g.lineWidth = 2; g.stroke();
     txt(g, 'ENTERPRISE VALUE', 0, -64, 11, C.amber, 600, MONO, 'center');
     txt(g, fmt(42.3 * clamp(ep), 1) + 'M€', 0, -22, 34, C.text, 800, DISP, 'center');
     [['WACC', '9.5%'], ['g', '2.0%'], ['EV/EBITDA', '9.8x']].forEach(([k, v], i) => { txt(g, k, -86, 18 + i * 24, 12, C.muted, 500, MONO); txt(g, v, 86, 18 + i * 24, 12, C.text, 700, MONO, 'right'); });
@@ -299,23 +299,123 @@
       const y = 128 + i * 56, p = eo(prog(t, .2 + i * .35, .8 + i * .35)); if (p <= 0) return;
       g.globalAlpha = p; g.save(); g.translate((1 - p) * -60, 0);
       g.fillStyle = C.line; g.fillRect(36, y + 18, 728, 1);
-      rr(g, 40, y - 16, 26, 30, 4); g.fillStyle = 'rgba(255,255,255,.08)'; g.fill(); txt(g, 'PDF', 53, y + 3, 8, C.muted, 600, MONO, 'center');
+      rr(g, 40, y - 16, 26, 30, 4); g.fillStyle = 'rgba(20,20,20,.08)'; g.fill(); txt(g, 'PDF', 53, y + 3, 8, C.muted, 600, MONO, 'center');
       txt(g, s, 78, y + 4, 13.5, C.text, 600);
       txt(g, a, 330, y + 4, 13, C.text, 600, MONO);
       const cp = prog(t, .8 + i * .35, 1.3 + i * .35);
       if (cp > 0) { const lab = L(en, es); g.font = `600 11.5px ${MONO}`; const w = g.measureText(lab).width + 20;
-        rr(g, 470, y - 12, w * cp, 24, 12); g.fillStyle = 'rgba(134,188,37,.16)'; g.fill();
+        rr(g, 470, y - 12, w * cp, 24, 12); g.fillStyle = 'rgba(240,87,26,.16)'; g.fill();
         if (cp >= 1) txt(g, lab, 480, y + 4, 11.5, C.amber, 600, MONO); }
       const bp = prog(t, 1.4 + i * .35, 1.7 + i * .35);
-      if (bp > 0) { g.fillStyle = C.teal; g.globalAlpha = p * bp; g.beginPath(); g.arc(704, y, 11, 0, 6.3); g.fill(); txt(g, '✓', 704, y + 5, 13, '#000000', 800, UI, 'center'); done++; }
+      if (bp > 0) { g.fillStyle = C.teal; g.globalAlpha = p * bp; g.beginPath(); g.arc(704, y, 11, 0, 6.3); g.fill(); txt(g, '✓', 704, y + 5, 13, '#FFFFFF', 800, UI, 'center'); done++; }
       g.restore(); g.globalAlpha = 1;
     });
-    rr(g, 560, 440, 204, 28, 14); g.fillStyle = 'rgba(0,171,171,.14)'; g.fill();
+    rr(g, 560, 440, 204, 28, 14); g.fillStyle = 'rgba(45,45,45,.14)'; g.fill();
     txt(g, `${done}/6 ` + L('matched · 0 manual', 'cuadradas · 0 manual'), 662, 459, 11.5, C.teal, 600, MONO, 'center');
     fadeLoop(g, t);
   }
 
-  const R = { management, board, consolidated, budget, cash, fpa, model, books };
+
+  // 9 ── Quality of earnings: reported → adjusted EBITDA bridge
+  function qoe(g, t) {
+    chrome(g, L('Quality of earnings — FY25 · Target Co.', 'Calidad del resultado — FY25 · Target Co.'), 'QoE');
+    card(g, 20, 56, 760, 424);
+    txt(g, L('EBITDA bridge · US$M', 'Puente de EBITDA · M US$'), 40, 86, 13, C.text2, 600);
+    const steps = [[L('Reported', 'Reportado'), 12.4, 'base'], [L('One-off revenue', 'Ingreso no recurrente'), -1.1], [L('Capitalised opex', 'Gasto capitalizado'), -0.6],
+                   [L('Owner costs', 'Gastos del dueño'), 0.3], [L('Bad-debt provision', 'Provisión insolvencias'), -0.5], [L('Adjusted', 'Ajustado'), 10.5, 'base']];
+    const base = 440, k = 22, x0 = 52, w = 88, gap = 34; let run = 0;
+    g.fillStyle = C.line; for (let i = 0; i <= 4; i++) g.fillRect(40, base - i * 4 * k, 720, 1);
+    for (let i = 0; i <= 3; i++) txt(g, fmt(i * 4), 36, base - i * 4 * k + 4, 10, C.muted, 500, MONO, 'right');
+    steps.forEach(([n, v, kind], i) => {
+      const p = eo(prog(t, .3 + i * .45, .9 + i * .45)), x = x0 + i * (w + gap);
+      let top, h, col;
+      if (kind) { top = base - v * k * p; h = v * k * p; col = i ? C.orange : C.ice; run = v; }
+      else { const from = run, to = run + v; top = base - Math.max(from, to) * k; h = Math.abs(v) * k * p; if (v < 0) top = base - from * k; col = v < 0 ? C.red : C.teal; run = to; }
+      g.globalAlpha = clamp(p * 3); rr(g, x, top, w, Math.max(h, 1), 4); g.fillStyle = col; g.fill();
+      txt(g, (v > 0 && !kind ? '+' : '') + fmt(v, 1), x + w / 2, (kind || v > 0 ? top : top + h) + (kind || v > 0 ? -8 : 16), 13, C.text, 700, UI, 'center');
+      const words = n.split(' '); words.forEach((wd, j) => txt(g, wd, x + w / 2, base + 18 + j * 13, 10.5, C.muted, 500, UI, 'center'));
+      g.globalAlpha = 1;
+    });
+    if (t > 3.2) { const a = clamp((t - 3.2) * 2); g.globalAlpha = a; rr(g, 470, 100, 290, 62, 10); g.fillStyle = 'rgba(212,53,28,.12)'; g.fill(); g.strokeStyle = C.red; g.stroke();
+      txt(g, L('Adjusted EBITDA −15% vs reported', 'EBITDA ajustado −15% vs reportado'), 486, 124, 13, C.text, 700);
+      txt(g, L('At 8.0x: −US$15M on enterprise value', 'A 8,0x: −15 M US$ de valor empresa'), 486, 146, 12, C.text2, 500); g.globalAlpha = 1; }
+    fadeLoop(g, t);
+  }
+
+  // 10 ── Net debt & working capital: normalised NWC peg + debt-like items
+  function nwc(g, t) {
+    chrome(g, L('Net debt & working capital — locked box', 'Deuda neta y circulante — locked box'), L('SPA INPUT', 'INPUT SPA'));
+    card(g, 20, 56, 470, 424); card(g, 504, 56, 276, 424);
+    txt(g, L('Net working capital · last 24 months · US$M', 'Circulante · últimos 24 meses · M US$'), 38, 86, 12.5, C.text2, 600);
+    const v = [4.1, 4.4, 4.0, 4.6, 4.9, 4.5, 4.2, 4.7, 5.0, 4.8, 4.4, 4.6, 4.3, 4.8, 5.1, 4.7, 4.5, 4.9, 5.2, 4.8, 4.6, 4.4, 3.6, 2.9];
+    const X0 = 50, Y0 = 430, dx = 18.5, k = 55, p = prog(t, .3, 2.6), n = Math.max(2, Math.floor(p * v.length));
+    g.fillStyle = C.line; for (let i = 0; i <= 5; i++) g.fillRect(X0 - 10, Y0 - i * k, 440, 1);
+    g.strokeStyle = C.ice; g.lineWidth = 2.2; g.beginPath();
+    for (let i = 0; i < n; i++) { const x = X0 + i * dx, y = Y0 - v[i] * k * .82; i ? g.lineTo(x, y) : g.moveTo(x, y); } g.stroke();
+    const peg = 4.6, py = Y0 - peg * k * .82;
+    if (t > 2.8) { g.strokeStyle = C.orange; g.setLineDash([6, 5]); g.lineWidth = 1.5; g.beginPath(); g.moveTo(X0 - 10, py); g.lineTo(X0 + 23 * dx, py); g.stroke(); g.setLineDash([]);
+      txt(g, L('Normalised peg 4.6', 'Peg normalizado 4,6'), X0, py - 8, 11, C.amber, 600, MONO); }
+    if (t > 3.4) { const x = X0 + 23 * dx, y = Y0 - 2.9 * k * .82; g.beginPath(); g.arc(x, y, 7, 0, 6.3); g.strokeStyle = C.red; g.lineWidth = 2; g.stroke();
+      rr(g, 236, 340, 236, 44, 8); g.fillStyle = 'rgba(212,53,28,.12)'; g.fill();
+      txt(g, L('Payables stretched before close', 'Proveedores estirados antes del cierre'), 248, 358, 11.5, C.text, 700);
+      txt(g, L('Price adjustment: −US$1.7M', 'Ajuste de precio: −1,7 M US$'), 248, 375, 11.5, C.red, 600); }
+    txt(g, L('Debt-like items', 'Partidas asimilables a deuda'), 522, 86, 12.5, C.text2, 600);
+    const items = [[L('Bank debt', 'Deuda bancaria'), 8.2], [L('Lease liabilities', 'Arrendamientos'), 2.4], [L('Deferred revenue', 'Ingresos diferidos'), 1.1], [L('Unpaid bonuses', 'Bonus pendientes'), 0.6], [L('Tax exposure', 'Contingencia fiscal'), 0.4]];
+    let sum = 0;
+    items.forEach(([nm, val], i) => { const a = clamp((t - .6 - i * .35) * 3); if (a <= 0) return; sum += val * (a >= 1 ? 1 : 0); g.globalAlpha = a;
+      txt(g, nm, 522, 124 + i * 40, 13, C.text, 500); txt(g, fmt(val, 1), 762, 124 + i * 40, 13, i ? C.amber : C.text, 700, MONO, 'right');
+      g.fillStyle = C.line; g.fillRect(522, 136 + i * 40, 240, 1); g.globalAlpha = 1; });
+    if (t > 2.6) { txt(g, L('Adjusted net debt', 'Deuda neta ajustada'), 522, 352, 13, C.text2, 600); txt(g, fmt(12.7, 1), 762, 352, 22, C.orange, 800, DISP, 'right');
+      txt(g, L('+4.5 vs management view', '+4,5 vs visión de la dirección'), 522, 378, 11.5, C.red, 600); }
+    fadeLoop(g, t);
+  }
+
+  // 11 ── Revenue quality: customer concentration + recurring mix
+  function revenue(g, t) {
+    chrome(g, L('Revenue quality — customer cube', 'Calidad de ingresos — cubo de clientes'), L('100% OF INVOICES', '100% DE FACTURAS'));
+    card(g, 20, 56, 470, 424); card(g, 504, 56, 276, 424);
+    txt(g, L('Share of revenue by customer', 'Peso de cada cliente en ingresos'), 38, 86, 12.5, C.text2, 600);
+    const cs = [['Customer A', 34], ['Customer B', 21], ['Customer C', 8], ['Customer D', 6], ['Customer E', 4], [L('Other 212', 'Otros 212'), 27]];
+    cs.forEach(([n, s], i) => { const p = eo(prog(t, .3 + i * .18, 1.2 + i * .18)), y = 112 + i * 54, w = s * 8.4 * p;
+      txt(g, n, 38, y + 18, 12.5, C.text, 500); rr(g, 150, y + 4, w, 22, 4); g.fillStyle = i < 2 ? C.orange : i === 5 ? 'rgba(20,20,20,.14)' : C.ice; g.fill();
+      txt(g, fmt(s * p) + '%', 158 + w, y + 20, 12, C.text2, 600, MONO); });
+    if (t > 2.4) { const a = clamp((t - 2.4) * 2); g.globalAlpha = a; g.strokeStyle = C.red; g.lineWidth = 1.5; g.setLineDash([5, 4]); rr(g, 30, 108, 448, 108, 8); g.stroke(); g.setLineDash([]);
+      txt(g, L('Top-2 = 55% · contract A renews in 7 months', 'Top-2 = 55% · el contrato A renueva en 7 meses'), 38, 448, 12.5, C.red, 700); g.globalAlpha = 1; }
+    txt(g, L('Recurring vs one-off', 'Recurrente vs puntual'), 522, 86, 12.5, C.text2, 600);
+    const cx = 642, cy = 230, r = 78, rec = .82 * eo(prog(t, .8, 2.4));
+    g.lineWidth = 26; g.strokeStyle = 'rgba(20,20,20,.08)'; g.beginPath(); g.arc(cx, cy, r, 0, 6.283); g.stroke();
+    g.strokeStyle = C.teal; g.beginPath(); g.arc(cx, cy, r, -1.571, -1.571 + 6.283 * rec); g.stroke();
+    txt(g, fmt(rec * 100) + '%', cx, cy + 4, 26, C.text, 800, DISP, 'center'); txt(g, L('recurring', 'recurrente'), cx, cy + 24, 11, C.muted, 500, UI, 'center');
+    const kp = [[L('Net revenue retention', 'Retención neta'), '104%'], [L('Churn, 12 months', 'Bajas, 12 meses'), '9%'], [L('Credit notes after close', 'Abonos tras cierre'), '2.1%']];
+    kp.forEach(([n, vv], i) => { if (t < 2.6 + i * .3) return; txt(g, n, 522, 360 + i * 34, 12, C.text2, 500); txt(g, vv, 762, 360 + i * 34, 13, i === 2 ? C.red : C.text, 700, MONO, 'right'); });
+    fadeLoop(g, t);
+  }
+
+  // 12 ── Forensic ledger testing: every journal entry scored, outliers explained
+  function forensic(g, t) {
+    chrome(g, L('Journal-entry testing — full population', 'Test de asientos — población completa'), L('AI + CFE REVIEW', 'IA + REVISIÓN CFE'));
+    card(g, 20, 56, 500, 424); card(g, 534, 56, 246, 424);
+    const tested = Math.floor(1284302 * eo(prog(t, .2, 2.2)));
+    txt(g, fmt(tested), 40, 96, 26, C.text, 800, DISP); txt(g, L('entries tested · 100% of the ledger', 'asientos analizados · 100% del libro'), 40, 116, 12, C.muted, 500);
+    const X0 = 50, Y0 = 440, W = 450, H = 290;
+    g.fillStyle = C.line; g.fillRect(X0, Y0, W, 1); g.fillRect(X0, Y0 - H, 1, H);
+    txt(g, L('posting hour →', 'hora de registro →'), X0 + W, Y0 + 18, 10, C.muted, 500, MONO, 'right'); txt(g, L('amount ↑', 'importe ↑'), X0 + 6, Y0 - H + 10, 10, C.muted, 500, MONO);
+    let s = 7; const rnd = () => (s = (s * 9301 + 49297) % 233280) / 233280;
+    const n = Math.floor(260 * prog(t, .2, 2)); g.fillStyle = 'rgba(127,178,255,.55)';
+    for (let i = 0; i < n; i++) { const hx = .3 + rnd() * .45, x = X0 + hx * W, y = Y0 - Math.pow(rnd(), 2.4) * H * .55; g.beginPath(); g.arc(x, y, 2.2, 0, 6.3); g.fill(); }
+    const flags = [[.93, .82, L('Sunday 23:40 · manual · CFO user', 'Domingo 23:40 · manual · usuario CFO')], [.12, .7, L('Round amount US$250,000', 'Importe redondo 250.000 US$')], [.6, .9, L('Supplier owned by a director', 'Proveedor de un consejero')]];
+    flags.forEach(([fx, fy, lab], i) => { if (t < 2.4 + i * .6) return; const x = X0 + fx * W, y = Y0 - fy * H, pul = 1 + .3 * Math.sin(t * 6);
+      g.beginPath(); g.arc(x, y, 6 * pul, 0, 6.3); g.fillStyle = C.red; g.fill();
+      txt(g, String(i + 1), x, y + 4, 10, '#FFFFFF', 800, UI, 'center'); });
+    txt(g, L('Flagged for review', 'Para revisar'), 552, 86, 12.5, C.text2, 600);
+    flags.forEach(([, , lab], i) => { if (t < 2.4 + i * .6) return; const y = 112 + i * 92; rr(g, 548, y, 218, 80, 8); g.fillStyle = 'rgba(212,53,28,.08)'; g.fill();
+      txt(g, '#' + (i + 1), 560, y + 22, 12, C.red, 800, MONO);
+      const words = lab.split(' '); let line = '', ly = y + 42; words.forEach(wd => { const tr = line ? line + ' ' + wd : wd; g.font = `500 12px ${UI}`; if (g.measureText(tr).width > 190) { txt(g, line, 560, ly, 12, C.text, 500); line = wd; ly += 16; } else line = tr; }); txt(g, line, 560, ly, 12, C.text, 500); });
+    if (t > 4.6) txt(g, L('3 of 1.28M need a human', '3 de 1,28M necesitan a una persona'), 552, 440, 12, C.amber, 700);
+    fadeLoop(g, t);
+  }
+
+  const R = { management, board, consolidated, budget, cash, fpa, model, books, qoe, nwc, revenue, forensic };
 
   // ---------- mounting ----------
   const live = new Set();
